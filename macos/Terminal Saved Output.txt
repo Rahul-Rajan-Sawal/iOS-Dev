@@ -1,0 +1,24 @@
+
+
+    "other": true,
+    "comments": false,
+    "strings": true
+  },
+  "editor.suggestOnTriggerCharacters": true,
+
+  "[dart]": {
+    "editor.formatOnSave": true
+  },
+
+  "dart.experimentalRefactors": true
+}
+
+
+
+
+
+
+
+
+
+
