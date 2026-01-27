@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dashboard.dart';
+import 'MyMain.dart';
 
 class Mylogin extends StatefulWidget {
   const Mylogin({Key? key}) : super(key: key);
@@ -42,7 +42,8 @@ class _MyloginState extends State<Mylogin> {
     }
 
     return Scaffold(
-        extendBodyBehindAppBar: true, // body extends behind AppBar to show status bar color
+      extendBodyBehindAppBar:
+          true, // body extends behind AppBar to show status bar color
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.09),
@@ -218,7 +219,7 @@ class _MyloginState extends State<Mylogin> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => MyDashboard(username: userId),
+                        builder: (_) => MyMain(username: userId),
                       ),
                     );
                   },
