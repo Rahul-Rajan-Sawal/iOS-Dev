@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+//import 'package:curved_labeled_navigation_bar/curved_navigation_bar.dart';
+
 import 'package:flutter_application_1/Drawer/my_drawer_header.dart';
 import 'package:flutter_application_1/Fragments/calendar_fragment.dart';
 import 'package:flutter_application_1/Fragments/create_lead_fragment.dart';
@@ -71,7 +73,8 @@ class _MyMainState extends State<MyMain> {
     _pages = [
       const SearchFragment(),
       const Calendar(),
-      MyDashboard(username: widget.username),
+      DashboardScreen(),
+      //MyDashboard(username: widget.username),
       const MyCreateLead(),
       const MySetting(),
     ];
@@ -118,27 +121,58 @@ class _MyMainState extends State<MyMain> {
         ),
       ),
 
-      bottomNavigationBar: SafeArea(
-        child: CurvedNavigationBar(
-          index: _currentIndex,
-          height: navBarHeight,
-          color: Color(0xFF00D4FF),
-          backgroundColor: Colors.transparent,
-          buttonBackgroundColor: Colors.amber.shade300,
-          items: const [
-            _NavItems(icon: Icons.search, label: "Search"),
-            _NavItems(icon: Icons.calendar_today, label: "Calendar"),
-            _NavItems(icon: Icons.dashboard, label: "Dashboard", big: true),
-            _NavItems(icon: Icons.create, label: "Create Lead"),
-            _NavItems(icon: Icons.settings, label: "Settings"),
+
+    bottomNavigationBar: Stack(
+  alignment: Alignment.bottomCenter,
+  children: [
+
+    /// 🔹 Curved bar (icons only)
+    CurvedNavigationBar(
+      index: _currentIndex,
+      height: navBarHeight,
+      color: Colors.white,
+      backgroundColor: const Color(0xFF4A86FF),
+      buttonBackgroundColor: Colors.white,
+      animationDuration: const Duration(milliseconds: 300),
+
+      items: const [
+        Icon(Icons.search, color: Colors.black),
+        Icon(Icons.calendar_today, color: Colors.black),
+        Icon(Icons.dashboard, color: Colors.black, size: 32),
+        Icon(Icons.create, color: Colors.black),
+        Icon(Icons.settings, color: Colors.black),
+      ],
+
+      onTap: (index) {
+        setState(() {
+          _currentIndex = index;
+        });
+      },
+    ),
+
+    /// 🔹 Fixed labels (DO NOT MOVE)
+    Positioned(
+      bottom: 6,
+      left: 0,
+      right: 0,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: const [
+            _BottomLabel(text: "Search"),
+            _BottomLabel(text: "Calendar"),
+            _BottomLabel(text: "Dashboard"),
+            _BottomLabel(text: "Create Lead"),
+            _BottomLabel(text: "Settings"),
           ],
-          onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
         ),
       ),
+    ),
+  ],
+),
+
+
     );
   }
 
@@ -190,30 +224,27 @@ class _MyMainState extends State<MyMain> {
 
 // ---------------- Bottom Nav Item Widget ----------------
 
-class _NavItems extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final bool big;
+class _BottomLabel extends StatelessWidget {
+  final String text;
 
-  const _NavItems({
-    required this.icon,
-    required this.label,
-    this.big = false,
-  });
+  const _BottomLabel({required this.text});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(icon, size: big ? 34 : 26),
-        const SizedBox(height: 2),
-        Text(label, style: const TextStyle(fontSize: 12)),
-      ],
+    return SizedBox(
+      width: 60,
+      child: Text(
+        text,
+        textAlign: TextAlign.center,
+        style: const TextStyle(
+          fontSize: 11,
+          color: Colors.black,
+        ),
+      ),
     );
   }
-
-
-
 }
+
+
+
 
