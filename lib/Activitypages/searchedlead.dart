@@ -24,6 +24,22 @@ class _SearchedLeadState extends State<SearchedLead> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Searched Leads"),
+        elevation: 0,
+  backgroundColor: Colors.transparent,
+  iconTheme: const IconThemeData(color: Colors.white),
+  flexibleSpace: Container(
+    decoration: const BoxDecoration(
+      gradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [
+          Color(0xFF090979), // same dark blue
+          Color(0xFF00D4FF), // same cyan
+        ],
+      ),
+    ),
+  ),
+
       ),
       body: widget.leadList.isEmpty
           ? const Center(child: Text("No records found"))
@@ -43,7 +59,14 @@ class _SearchedLeadState extends State<SearchedLead> {
         width: double.infinity,
         padding: const EdgeInsets.all(16),
         decoration: const BoxDecoration(
-          color: Colors.blue,
+    gradient: const LinearGradient(
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+      colors: [
+        Color(0xFF090979), 
+        Color(0xFF00D4FF), 
+      ],
+    ),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(12),
             topRight: Radius.circular(12),
@@ -73,7 +96,7 @@ class _SearchedLeadState extends State<SearchedLead> {
                   child: Text(
                     lead['policyName'] ?? '',
                     style: const TextStyle(
-                      color: Colors.white70,
+                      color: Colors.white,
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
                     ),
@@ -95,7 +118,7 @@ class _SearchedLeadState extends State<SearchedLead> {
                           Text(
                             "Lead ID",
                             style: TextStyle(
-                              color: Colors.white70,
+                              color: Colors.white,
                               fontSize: 14,
                             ),
                           ),
@@ -103,7 +126,7 @@ class _SearchedLeadState extends State<SearchedLead> {
                           Text(
                             "Lead Amount",
                             style: TextStyle(
-                              color: Colors.white70,
+                              color: Colors.white,
                               fontSize: 14,
                             ),
                           ),
