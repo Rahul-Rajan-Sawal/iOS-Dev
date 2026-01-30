@@ -16,7 +16,18 @@ class _MyCreateLead extends State<MyCreateLead>{
     double screenHeight = MediaQuery.of(context).size.height;
 
 
-  return Scaffold();
+  return Scaffold(
+
+     body:SingleChildScrollView(
+      padding: const EdgeInsets.all(12.0),
+      child:Column(
+        crossAxisAlignment:CrossAxisAlignment.start,
+        
+
+        
+      )
+     )
+  );
   }
 
 }

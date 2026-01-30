@@ -39,50 +39,179 @@ List<Map<String, dynamic>> dummyLeadResponse = [
     "policyName": "Health Plus",
     "leadId": "LD00187658",
     "leadAmount": 25000,
+    "mobilenumber": "XXXXXX3782",
+    "emailid": "rahul1@krishmark.com",
+    "activitystatus": "Pending for contact verification",
+    "remark": "N/A",
+    "policynumber": "1232781927378",
+    "leadtype": "Contact",
+    "premium": 98956710.0,
+    "vehiclemakemodel": "Lamborghini Revuelto",
+    "ncb": "No",
+    "addon": "Not Available",
+    "activity": "N/A",
+    "activitydoneby": "N/A",
+    "activitydate": "01-02-2026",
+    "tremark":"Not available",
+    "leadstatus": "WIP",
+    "workflowstatus": "Assigned to sales manager – pending for mail verification",
   },
   {
     "name": "Sameer Sahu",
-    "policyName": "Life Secure Self Cure ",
+    "policyName": "Life Secure Self Cure",
     "leadId": "LD00223452",
     "leadAmount": 42000,
+    "mobilenumber": "XXXXXX1198",
+    "emailid": "sameer.sahu@krishmark.com",
+    "activitystatus": "Contacted",
+    "remark": "Customer requested callback",
+    "policynumber": "8765432198765",
+    "leadtype": "Lead",
+    "premium": 42000.0,
+    "vehiclemakemodel": "Toyota Fortuner",
+    "ncb": "N/A",
+    "addon": "Not Available",
+    "activity": "Outbound Call",
+    "activitydoneby": "Agent_102",
+    "activitydate": "28-01-2026",
+    "tremark":"Not available",
+    "leadstatus": "In Progress",
+    "workflowstatus": "Callback scheduled",
   },
   {
     "name": "Keshav Khatri",
     "policyName": "Car Protect",
     "leadId": "LD00332342",
     "leadAmount": 18000,
+    "mobilenumber": "XXXXXX5521",
+    "emailid": "keshav.k@krishmark.com",
+    "activitystatus": "Interested",
+    "remark": "Quotation shared",
+    "policynumber": "3456789012345",
+    "leadtype": "Lead",
+    "premium": 18000.0,
+    "vehiclemakemodel": "Hyundai Creta",
+    "ncb": "Yes",
+    "addon": "Engine Protect",
+    "activity": "Quote Sent",
+    "activitydoneby": "Agent_089",
+    "activitydate": "27-01-2026",
+    "tremark":"Not available",
+    "leadstatus": "WIP",
+    "workflowstatus": "Awaiting customer confirmation",
   },
   {
     "name": "Vikash Jagtap",
     "policyName": "Car Protect",
     "leadId": "LD00323621",
     "leadAmount": 18000,
+    "mobilenumber": "XXXXXX8843",
+    "emailid": "vikash.j@krishmark.com",
+    "activitystatus": "Not Reachable",
+    "remark": "Phone switched off",
+    "policynumber": "9081726354512",
+    "leadtype": "Contact",
+    "premium": 18000.0,
+    "vehiclemakemodel": "Honda City",
+    "ncb": "Yes",
+    "addon": "Zero Dep",
+    "activity": "Call Attempt",
+    "activitydoneby": "Agent_045",
+    "activitydate": "26-01-2026",
+    "tremark":"Not available",
+    "leadstatus": "Open",
+    "workflowstatus": "Pending contact verification",
   },
   {
     "name": "Amit Yadav",
     "policyName": "Car Protect",
     "leadId": "LD00364534",
     "leadAmount": 18000,
+    "mobilenumber": "XXXXXX6629",
+    "emailid": "amit.yadav@krishmark.com",
+    "activitystatus": "Converted",
+    "remark": "Policy issued successfully",
+    "policynumber": "5647382910456",
+    "leadtype": "Lead",
+    "premium": 18000.0,
+    "vehiclemakemodel": "Maruti Baleno",
+    "ncb": "No",
+    "addon": "Roadside Assistance",
+    "activity": "Policy Issued",
+    "activitydoneby": "Agent_011",
+    "activitydate": "25-01-2026",
+    "tremark":"Not available",
+    "leadstatus": "Closed",
+    "workflowstatus": "Policy active",
   },
   {
     "name": "Vishal Kumar",
     "policyName": "Car Protect",
     "leadId": "LD00325577",
     "leadAmount": 18000,
+    "mobilenumber": "XXXXXX7712",
+    "emailid": "vishal.kumar@krishmark.com",
+    "activitystatus": "Pending",
+    "remark": "Documents awaited",
+    "policynumber": "1122334455667",
+    "leadtype": "Lead",
+    "premium": 18000.0,
+    "vehiclemakemodel": "Tata Nexon",
+    "ncb": "Yes",
+    "addon": "Not Available",
+    "activity": "Doc Follow-up",
+    "activitydoneby": "Agent_066",
+    "activitydate": "24-01-2026",
+    "tremark":"Not available",
+    "leadstatus": "WIP",
+    "workflowstatus": "Pending document upload",
   },
   {
     "name": "Sumit Jadav",
     "policyName": "Car Protect",
     "leadId": "LD00364335",
     "leadAmount": 18000,
+    "mobilenumber": "XXXXXX9981",
+    "emailid": "sumit.jadav@krishmark.com",
+    "activitystatus": "Interested",
+    "remark": "Requested premium breakup",
+    "policynumber": "7788990011223",
+    "leadtype": "Lead",
+    "premium": 18000.0,
+    "vehiclemakemodel": "Kia Seltos",
+    "ncb": "No",
+    "addon": "Zero Dep",
+    "activity": "Call Completed",
+    "activitydoneby": "Agent_032",
+    "activitydate": "23-01-2026",
+    "tremark":"Not available",
+    "leadstatus": "Open",
+    "workflowstatus": "Awaiting customer decision",
   },
   {
     "name": "Chinna Swami Mutta Swami Venugupal Ayier",
-    "policyName": "Car Protect all cars self and incident car ",
+    "policyName": "Car Protect All Cars",
     "leadId": "LD00335234",
     "leadAmount": 180007544,
+    "mobilenumber": "XXXXXX4455",
+    "emailid": "chinna.swami@krishmark.com",
+    "activitystatus": "High Value Lead",
+    "remark": "Priority handling assigned",
+    "policynumber": "9998887776665",
+    "leadtype": "VIP Lead",
+    "premium": 180007544.0,
+    "vehiclemakemodel": "Bugatti Chiron SS",
+    "ncb": "Yes",
+    "addon": "All Add-ons",
+    "activity": "VIP Assignment",
+    "activitydoneby": "Senior Manager",
+    "activitydate": "22-01-2026",
+    "tremark":"Not available",
+    "leadstatus": "WIP",
+    "workflowstatus": "Handled by senior sales team",
   },
 ];
+
 
   //for Dropdata
   List<String> dropdownData = [];
@@ -232,7 +361,7 @@ List<Map<String, dynamic>> dummyLeadResponse = [
 
                       )
                     );
-                  }, //onSearch(context); ,
+                  }, 
                   child: const Text("Search"),
                 ))
               ],
@@ -247,7 +376,7 @@ List<Map<String, dynamic>> dummyLeadResponse = [
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Material(
-        elevation: 4, // real Material elevation
+        elevation: 4, 
         color: Colors.white,
         borderRadius: BorderRadius.circular(4),
         child: SizedBox(
@@ -257,7 +386,7 @@ List<Map<String, dynamic>> dummyLeadResponse = [
             decoration: InputDecoration(
               labelText: labelText,
               floatingLabelBehavior:
-                  FloatingLabelBehavior.auto, // make label float properly
+                  FloatingLabelBehavior.auto, 
               contentPadding: const EdgeInsets.fromLTRB(14, 20, 14, 16),
               border: const OutlineInputBorder(),
             ),
@@ -267,38 +396,7 @@ List<Map<String, dynamic>> dummyLeadResponse = [
     );
   }
 
-  //UI helper Classes
-
-//   Widget buildTextField(TextEditingController controller,String labelText){
-//     return Padding(
-//       padding: const EdgeInsets.only(bottom: 12),
-// child: Container(
-// height: SizeConfig.screenHeight * 0.05, // responsive height
-// decoration: BoxDecoration(
-//   color: Colors.white,
-//   boxShadow: [
-//     BoxShadow(
-
-//      color: Colors.grey.withOpacity(0.4),
-//       spreadRadius: 2,
-//       blurRadius: 6,
-//       offset: const Offset(0, 3),
-//     ),
-//   ],
-// ),
-//         child:TextField(controller: controller,
-
-//       decoration: InputDecoration(
-
-//         labelText: labelText,
-//         border: const OutlineInputBorder(),
-//       ),
-//       )
-
-// ),
-
-//  );
-//   }
+  
 
 //----------------
   Widget buildDropdown(
@@ -309,7 +407,7 @@ List<Map<String, dynamic>> dummyLeadResponse = [
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Material(
-        elevation: 4, // ✅ replaces boxShadow
+        elevation: 4, 
         color: Colors.white,
         borderRadius: BorderRadius.circular(4),
         child: SizedBox(
@@ -338,85 +436,7 @@ List<Map<String, dynamic>> dummyLeadResponse = [
     );
   }
 
-// Widget buildDropdown(
-//   String labelText,
-//   String? value,
-//   ValueChanged<String?> onChanged,
-// ) {
-//   return Padding(
-//     padding: const EdgeInsets.only(bottom: 12),
-//     child: Container(
-//             height: SizeConfig.screenHeight * 0.05, // responsive height
-//       decoration: BoxDecoration(
-//         color: Colors.white,
-//        // borderRadius: BorderRadius.circular(8),
-//         boxShadow: const [
-//           BoxShadow(
-//             color: Colors.black26,
-//             blurRadius: 6,
-//             offset: Offset(0, 3),
-//           ),
-//         ],
-//       ),
-//       child: DropdownButtonFormField<String>(
-//         value: value,
-//         isExpanded: true,
-//         items: dropdownData
-//             .map(
-//               (e) => DropdownMenuItem<String>(
-//                 value: e,
-//                 child: Text(e),
-//               ),
-//             )
-//             .toList(),
-//         onChanged: onChanged,
-//         decoration: InputDecoration(
-//           labelText: labelText,
-//           border: InputBorder.none,
-//           contentPadding:
-//               const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-//         ),
-//       ),
-//     ),
-//   );
-// }
 
-// Widget buildDateField(
-//   String labelText,
-//   TextEditingController controller,
-// ) {
-//   return Padding(
-//     padding: const EdgeInsets.only(bottom: 12),
-//     child: Container(
-//     height: SizeConfig.screenHeight * 0.05, // responsive height
-
-//       decoration: BoxDecoration(
-//         color: Colors.white,
-//        // borderRadius: BorderRadius.circular(8),
-//         boxShadow: const [
-
-//           BoxShadow(
-//             color: Colors.black26,
-//             blurRadius: 6,
-//             offset: Offset(0, 3),
-//           ),
-//         ],
-//       ),
-//       child: TextField(
-//         controller: controller,
-//         readOnly: true,
-//         onTap: () => pickDate(controller),
-//         decoration: InputDecoration(
-//           labelText: labelText,
-//           suffixIcon: const Icon(Icons.calendar_today),
-//           border: InputBorder.none,
-//           contentPadding:
-//               const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-//         ),
-//       ),
-//     ),
-//   );
-// }
 
   Widget buildDateField(
     String labelText,
@@ -446,10 +466,6 @@ List<Map<String, dynamic>> dummyLeadResponse = [
     );
   }
 
-  //buildTextField(TextEditingController prosp1crtl, String s) {}
-
-  //buildDropdown(String s, String? lob, void Function(v) param2) {}
-
-  //buildDateField(String s, TextEditingController polEndDateFrm) {}
+ 
 
 }
