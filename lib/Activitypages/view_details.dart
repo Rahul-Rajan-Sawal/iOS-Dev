@@ -1,15 +1,69 @@
       import 'package:flutter/material.dart';
 
       class ViewDetails extends StatefulWidget {
-        const ViewDetails({Key? key}) : super(key: key);
+
+        final Map<String, dynamic> lead;
+        const ViewDetails({Key? key, required this.lead}) : super(key: key);
 
         @override
         State<ViewDetails> createState() => _ViewDetailsState();
       }
 
       class _ViewDetailsState extends State<ViewDetails> {
-        final String leadId = "LD12345";
-        final String leadValue = "₹50,000";
+
+        late String leadId;
+        late String leadValue;
+        late String name;
+        late String policyName;          
+        late String premium;
+        late String vehicleMakeModel;
+        late String ncb;
+        late String addOn;
+        late String activityStatus;
+        late String activityDoneBy;
+        late String activityDate;
+        late String remark;
+        late String tremark;
+        late String emailId;
+        late String mobilenumber;        
+        late String leadType;
+        late String policyNumber;
+        late String workflowStatus;      
+        late String leadStatus;
+        late String activity;
+        late String renewalNotice;
+
+        
+
+        @override
+        void initState(){
+          super.initState();
+
+            
+          leadId     = widget.lead['leadId'] ?? 'Error loading lead Id';
+          leadValue  = "₹${widget.lead['leadAmount'] ?? 0}";
+          name   = widget.lead['name'] ?? '';
+          policyName = widget.lead['policyName'] ?? '';
+          premium    = widget.lead['premium']?.toString() ?? '0';
+          vehicleMakeModel = widget.lead['vehiclemakemodel'] ?? ''; 
+          ncb = widget.lead['ncb'] ?? '';
+          addOn = widget.lead['addon'] ?? ''; 
+          activityStatus = widget.lead['activitystatus'] ?? '';
+          activityDoneBy = widget.lead['activitydoneby'] ?? ''; 
+          activityDate   = widget.lead['activitydate'] ?? '';
+          remark = widget.lead['remark'] ?? '';
+          tremark =widget.lead['tremark'] ?? '';
+          policyNumber = widget.lead['policynumber'] ?? '';
+          leadType = widget.lead['leadtype'] ?? '';
+          leadStatus = widget.lead['leadstatus'] ?? '';
+          workflowStatus = widget.lead['workflowstatus'] ?? '';
+          activity = widget.lead['activity'] ?? '';
+          emailId = widget.lead['emailid'] ?? '';
+          mobilenumber = widget.lead['mobilenumber'] ?? '';
+
+
+
+        }
 
         @override
         Widget build(BuildContext context) {
@@ -54,35 +108,7 @@
                                 ),
                               ),
                             ),
-                            // Positioned(
-                            //   top: 50,
-                            //   right: 16,
-                            //   child: Column(
-                            //     crossAxisAlignment: CrossAxisAlignment.end,
-                            //     children: [
-                            //       const SizedBox(width: 95),
-                            //       const Text(
-                            //         "Lead ID",
-                            //         style: TextStyle(
-                            //           color: Colors.white70,
-                            //           fontSize: 14,
-                            //         ),
-                            //       ),
-                            //       Text(
-                            //         leadId,
-                            //         style: const TextStyle(
-                            //             color: Colors.white,
-                            //             fontSize: 18,
-                            //             fontWeight: FontWeight.bold),
-                            //       ),
-                            //       Text(
-                            //         leadValue,
-                            //         style: const TextStyle(
-                            //             color: Colors.white70, fontSize: 14),
-                            //       ),
-                            //     ],
-                            //   ),
-                            // ),
+                            
                             Align(
                               alignment: Alignment.center,
                               child: AnimatedOpacity(
@@ -94,16 +120,16 @@
                                     const Icon(Icons.person,
                                         size: 50, color: Colors.white),
                                     const SizedBox(height: 8),
-                                    const Text(
-                                      "Rahul Sawal",
+                                     Text(
+                                      "$name",
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     const SizedBox(height: 4),
-                                    const Text(
-                                      "Premium Lead",
+                                     Text(
+                                      "$leadType",
                                       style: TextStyle(color: Colors.white70),
                                     ),
                                     const SizedBox(height: 16),
@@ -186,7 +212,6 @@
                   sliver: SliverList(
                     delegate: SliverChildListDelegate(
                       [
-                        // CARD 1
                         Card(
                           elevation: 4,
                           shape: RoundedRectangleBorder(
@@ -227,7 +252,7 @@
                                           CrossAxisAlignment.start,
                                       children: [
                                         SizedBox(
-                                          width: 180,
+                                          width: 150,
                                           child: Container(
                                             padding:
                                                 const EdgeInsets.symmetric(
@@ -249,8 +274,9 @@
                                                 const EdgeInsets.symmetric(
                                                     horizontal: 1,
                                                     vertical: 5),
-                                            child: const Text(
-                                              ": 9845362738",
+                                            child: 
+                                             Text(
+                                              ": $mobilenumber",
                                               style: TextStyle(
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.w600,
@@ -267,7 +293,7 @@
                                           CrossAxisAlignment.start,
                                       children: [
                                         SizedBox(
-                                          width: 180,
+                                          width: 150,
                                           child: Container(
                                             padding:
                                                 const EdgeInsets.fromLTRB(
@@ -285,10 +311,11 @@
                                         Expanded(
                                           child: Container(
                                             padding:
-                                                const EdgeInsets.fromLTRB(
+                                           EdgeInsets.fromLTRB(
                                                     0, 8, 0, 15),
-                                            child: const Text(
-                                              ": abcd@krishmark.com",
+                                            child: 
+                                             Text(
+                                              ":$emailId",
                                               style: TextStyle(
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.w600,
@@ -317,7 +344,7 @@
                           ),
                           color: Colors.white,
                           child: Padding(
-                            padding: const EdgeInsets.fromLTRB(24, 0, 24, 5),
+                            padding: const EdgeInsets.fromLTRB(24, 0, 24, 15),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -347,7 +374,7 @@
                                       CrossAxisAlignment.start,
                                   children: [
                                     const SizedBox(
-                                      width: 180,
+                                      width: 150,
                                       child: Padding(
                                         padding:
                                             EdgeInsets.symmetric(
@@ -363,13 +390,13 @@
                                         ),
                                       ),
                                     ),
-                                    const Expanded(
+                                     Expanded(
                                       child: Padding(
                                         padding:
                                             EdgeInsets.symmetric(
                                                 vertical: 5),
                                         child: Text(
-                                          ": Pending For Contact Verification",
+                                          ": $activityStatus",
                                           style: TextStyle(
                                             fontSize: 15,
                                             fontWeight:
@@ -387,7 +414,7 @@
                                       CrossAxisAlignment.start,
                                   children: [
                                     const SizedBox(
-                                      width: 180,
+                                      width: 150,
                                       child: Padding(
                                         padding:
                                             EdgeInsets.fromLTRB(
@@ -403,13 +430,13 @@
                                         ),
                                       ),
                                     ),
-                                    const Expanded(
+                                     Expanded(
                                       child: Padding(
                                         padding:
                                             EdgeInsets.fromLTRB(
                                                 0, 8, 0, 15),
                                         child: Text(
-                                          ": Data Not Available",
+                                          ": $remark",
                                           style: TextStyle(
                                             fontSize: 15,
                                             fontWeight:
@@ -469,13 +496,13 @@
                                       CrossAxisAlignment.start,
                                   children: [
                                     const SizedBox(
-                                      width: 180,
+                                      width: 150,
                                       child: Padding(
                                         padding:
                                             EdgeInsets.symmetric(
                                                 vertical: 5),
                                         child: Text(
-                                          ": Product",
+                                          "Product",
                                           style: TextStyle(
                                             fontSize: 15,
                                             fontWeight:
@@ -485,13 +512,13 @@
                                         ),
                                       ),
                                     ),
-                                    const Expanded(
+                                     Expanded(
                                       child: Padding(
                                         padding:
                                             EdgeInsets.symmetric(
                                                 vertical: 5),
                                         child: Text(
-                                          ": Private Car Comprehensive policy",
+                                          ": $policyName",
                                           style: TextStyle(
                                             fontSize: 15,
                                             fontWeight:
@@ -509,7 +536,7 @@
                                       CrossAxisAlignment.start,
                                   children: [
                                     const SizedBox(
-                                      width: 180,
+                                      width: 150,
                                       child: Padding(
                                         padding:
                                             EdgeInsets.fromLTRB(
@@ -525,13 +552,13 @@
                                         ),
                                       ),
                                     ),
-                                    const Expanded(
+                                     Expanded(
                                       child: Padding(
                                         padding:
                                             EdgeInsets.fromLTRB(
                                                 0, 8, 0, 15),
                                         child: Text(
-                                          ": 120122523110007013",
+                                          ": $policyNumber",
                                           style: TextStyle(
                                             fontSize: 15,
                                             fontWeight:
@@ -549,7 +576,7 @@
                                   crossAxisAlignment:CrossAxisAlignment.start,
                                   children:[
                                     const SizedBox (
-                                      width:180,
+                                      width:150,
                                       child: Padding(
                                         padding:EdgeInsets.fromLTRB(0,8,0,15),
                                         child:Text(
@@ -563,10 +590,10 @@
                                       ),
                                     ),
 
-                                    const Expanded(
+                                     Expanded(
                                       child:Padding(padding:EdgeInsets.fromLTRB(0,8,0,15),
                                       child:Text(
-                                        ": Lead",
+                                        ": $leadType",
                                         style:TextStyle(
                                           fontSize:15,
                                         fontWeight:FontWeight.w600,
@@ -581,7 +608,7 @@
                                   crossAxisAlignment:CrossAxisAlignment.start,
                                   children:[
                                     const SizedBox (
-                                      width:180,
+                                      width:150,
                                       child: Padding(
                                         padding:EdgeInsets.fromLTRB(0,8,0,15),
                                         child:Text(
@@ -595,10 +622,10 @@
                                       ),
                                     ),
 
-                                    const Expanded(
+                                     Expanded(
                                       child:Padding(padding:EdgeInsets.fromLTRB(0,8,0,15),
                                       child:Text(
-                                        ": 83746.00",
+                                        ": $premium",
                                         style:TextStyle(
                                           fontSize:15,
                                         fontWeight:FontWeight.w600,
@@ -614,7 +641,7 @@
                                   crossAxisAlignment:CrossAxisAlignment.start,
                                   children:[
                                     const SizedBox (
-                                      width:180,
+                                      width:150,
                                       child: Padding(
                                         padding:EdgeInsets.fromLTRB(0,8,0,15),
                                         child:Text(
@@ -628,10 +655,10 @@
                                       ),
                                     ),
 
-                                    const Expanded(
+                                     Expanded(
                                       child:Padding(padding:EdgeInsets.fromLTRB(0,8,0,15),
                                       child:Text(
-                                        ": Bugatti Chiron SS",
+                                        ": $vehicleMakeModel",
                                         style:TextStyle(
                                           fontSize:15,
                                         fontWeight:FontWeight.w600,
@@ -647,7 +674,7 @@
                                   crossAxisAlignment:CrossAxisAlignment.start,
                                   children:[
                                     const SizedBox (
-                                      width:180,
+                                      width:150,
                                       child: Padding(
                                         padding:EdgeInsets.fromLTRB(0,8,0,15),
                                         child:Text(
@@ -661,10 +688,10 @@
                                       ),
                                     ),
 
-                                    const Expanded(
+                                     Expanded(
                                       child:Padding(padding:EdgeInsets.fromLTRB(0,8,0,15),
                                       child:Text(
-                                        ": Yes",
+                                        ": $ncb",
                                         style:TextStyle(
                                           fontSize:15,
                                         fontWeight:FontWeight.w600,
@@ -680,7 +707,7 @@
                                   crossAxisAlignment:CrossAxisAlignment.start,
                                   children:[
                                     const SizedBox (
-                                      width:180,
+                                      width:150,
                                       child: Padding(
                                         padding:EdgeInsets.fromLTRB(0,8,0,15),
                                         child:Text(
@@ -694,10 +721,10 @@
                                       ),
                                     ),
 
-                                    const Expanded(
+                                     Expanded(
                                       child:Padding(padding:EdgeInsets.fromLTRB(0,8,0,15),
                                       child:Text(
-                                        ": Not Available",
+                                        ": $addOn",
                                         style:TextStyle(
                                           fontSize:15,
                                         fontWeight:FontWeight.w600,
@@ -750,7 +777,7 @@
                                       CrossAxisAlignment.start,
                                   children: [
                                     const SizedBox(
-                                      width: 180,
+                                      width: 150,
                                       child: Padding(
                                         padding:
                                             EdgeInsets.symmetric(
@@ -766,13 +793,13 @@
                                         ),
                                       ),
                                     ),
-                                    const Expanded(
+                                     Expanded(
                                       child: Padding(
                                         padding:
                                             EdgeInsets.symmetric(
                                                 vertical: 5),
                                         child: Text(
-                                          ": Pending For Contact Verification",
+                                          ": $activityStatus",
                                           style: TextStyle(
                                             fontSize: 15,
                                             fontWeight:
@@ -790,7 +817,7 @@
                                       CrossAxisAlignment.start,
                                   children: [
                                     const SizedBox(
-                                      width: 180,
+                                      width: 150,
                                       child: Padding(
                                         padding:
                                             EdgeInsets.fromLTRB(
@@ -806,13 +833,13 @@
                                         ),
                                       ),
                                     ),
-                                    const Expanded(
+                                     Expanded(
                                       child: Padding(
                                         padding:
                                             EdgeInsets.fromLTRB(
                                                 0, 8, 0, 15),
                                         child: Text(
-                                          ": BatchJob",
+                                          ": $activityDoneBy",
                                           style: TextStyle(
                                             fontSize: 15,
                                             fontWeight:
@@ -830,7 +857,7 @@
                                   crossAxisAlignment:CrossAxisAlignment.start,
                                   children:[
                                     const SizedBox (
-                                      width:180,
+                                      width:150,
                                       child: Padding(
                                         padding:EdgeInsets.fromLTRB(0,8,0,15),
                                         child:Text(
@@ -844,10 +871,10 @@
                                       ),
                                     ),
 
-                                    const Expanded(
+                                     Expanded(
                                       child:Padding(padding:EdgeInsets.fromLTRB(0,8,0,15),
                                       child:Text(
-                                        ": 28-01-2026 11:11 PM",
+                                        ": $activityDate",
                                         style:TextStyle(
                                           fontSize:15,
                                         fontWeight:FontWeight.w600,
@@ -862,7 +889,7 @@
                                   crossAxisAlignment:CrossAxisAlignment.start,
                                   children:[
                                     const SizedBox (
-                                      width:180,
+                                      width:150,
                                       child: Padding(
                                         padding:EdgeInsets.fromLTRB(0,8,0,15),
                                         child:Text(
@@ -876,10 +903,10 @@
                                       ),
                                     ),
 
-                                    const Expanded(
+                                     Expanded(
                                       child:Padding(padding:EdgeInsets.fromLTRB(0,8,0,15),
                                       child:Text(
-                                        ": Not Available",
+                                        ": $tremark",
                                         style:TextStyle(
                                           fontSize:15,
                                         fontWeight:FontWeight.w600,
@@ -890,9 +917,6 @@
                                     )
                                   ],
                                 ),
-
-                            
-
                               ],
                             ),
                           ),
@@ -933,7 +957,7 @@
                                       CrossAxisAlignment.start,
                                   children: [
                                     const SizedBox(
-                                      width: 180,
+                                      width: 150,
                                       child: Padding(
                                         padding:
                                             EdgeInsets.symmetric(
@@ -949,13 +973,13 @@
                                         ),
                                       ),
                                     ),
-                                    const Expanded(
+                                     Expanded(
                                       child: Padding(
                                         padding:
                                             EdgeInsets.symmetric(
                                                 vertical: 5),
                                         child: Text(
-                                          ": WIP",
+                                          ": $leadStatus",
                                           style: TextStyle(
                                             fontSize: 15,
                                             fontWeight:
@@ -973,7 +997,7 @@
                                       CrossAxisAlignment.start,
                                   children: [
                                     const SizedBox(
-                                      width: 180,
+                                      width: 150,
                                       child: Padding(
                                         padding:
                                             EdgeInsets.fromLTRB(
@@ -989,13 +1013,13 @@
                                         ),
                                       ),
                                     ),
-                                    const Expanded(
+                                     Expanded(
                                       child: Padding(
                                         padding:
                                             EdgeInsets.fromLTRB(
                                                 0, 8, 0, 15),
                                         child: Text(
-                                          ": Assigned To Sales Manager-Pending for Contact verification",
+                                          ": $workflowStatus",
                                           style: TextStyle(
                                             fontSize: 15,
                                             fontWeight:

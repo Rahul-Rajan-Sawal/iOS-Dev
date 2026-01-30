@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Drawer/my_drawer_header.dart';
+
+import 'package:flutter_application_1/Services/AllServices.dart';
 // import 'package:flutter_bottom_nav/Activities/filter_activity.dart';
 // import 'package:fluttertoast/fluttertoast.dart';
 
@@ -358,6 +361,8 @@ Widget _buildIcon() {
   }
 
   void _refreshData() {
+
+    ToastService.showToast(context, message: "Refreshing Data...");
     // ScaffoldMessenger.of(context).showSnackBar(
     //   const SnackBar(
     //     content: Text("Refreshing data..."),

@@ -122,16 +122,31 @@ class _MyMainState extends State<MyMain> {
       ),
 
 
-    bottomNavigationBar: Stack(
+bottomNavigationBar: Stack(
   alignment: Alignment.bottomCenter,
   children: [
+    Positioned.fill(
+      child: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color(0xFF4A86FF),
+              Color(0xFF00C6FF),
+            ],
+          ),
+        ),
+      ),
+    ),
 
-    /// 🔹 Curved bar (icons only)
+
     CurvedNavigationBar(
       index: _currentIndex,
       height: navBarHeight,
       color: Colors.white,
-      backgroundColor: const Color(0xFF4A86FF),
+      backgroundColor: Colors.transparent, // 👈 IMPORTANT
+      //backgroundColor: const Color(0xFF4A86FF),
       buttonBackgroundColor: Colors.white,
       animationDuration: const Duration(milliseconds: 300),
 

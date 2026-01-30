@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Activitypages/view_details.dart';
+import 'package:flutter_application_1/Activitypages/lead_summary.dart';
+
 
 class SearchedLead extends StatefulWidget {
   final List<Map<String, dynamic>> leadList;
@@ -25,21 +27,21 @@ class _SearchedLeadState extends State<SearchedLead> {
       appBar: AppBar(
         title: const Text("Searched Leads"),
         elevation: 0,
-  backgroundColor: Colors.transparent,
-  iconTheme: const IconThemeData(color: Colors.white),
-  flexibleSpace: Container(
-    decoration: const BoxDecoration(
-      gradient: LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-        colors: [
-          Color(0xFF090979), // same dark blue
-          Color(0xFF00D4FF), // same cyan
-        ],
-      ),
-    ),
-  ),
-
+         backgroundColor: Colors.transparent,
+          iconTheme: const IconThemeData(color: Colors.white),
+         flexibleSpace: Container
+         (
+         decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color(0xFF090979), // same dark blue
+            Color(0xFF00D4FF), // same cyan
+                 ],
+            ),
+          ),
+         ),
       ),
       body: widget.leadList.isEmpty
           ? const Center(child: Text("No records found"))
@@ -246,12 +248,24 @@ class _SearchedLeadState extends State<SearchedLead> {
   }
 
   void _onViewSummary(Map<String, dynamic> lead) {
-    print("View Summary clicked for ${lead['leadId']}");
-  }
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => LeadSummary(lead: lead),
+    ),
+  );
+
+  print("View Summary clicked for ${lead['leadId']}");
+}
+
 
   void _onViewDetails(Map<String, dynamic> lead) {
     print("View Details clicked for ${lead['leadId']}");
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewDetails()));
-
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context)=>ViewDetails(lead:lead),
+        ),
+        );
   }
 }
