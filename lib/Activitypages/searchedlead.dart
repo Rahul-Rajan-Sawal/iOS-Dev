@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Activitypages/view_details.dart';
 import 'package:flutter_application_1/Activitypages/lead_summary.dart';
+import 'package:flutter_application_1/Activitypages/lead_update_activity.dart';
 
 
 class SearchedLead extends StatefulWidget {
@@ -240,11 +241,15 @@ class _SearchedLeadState extends State<SearchedLead> {
     );
   }
 
-  // Example functions for the clickable icons
   void _onUpdateActivity(Map<String, dynamic> lead) {
-    // Do something with the lead
+    
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => LeadUpdate(lead:lead),
+      ),
+    );
     print("Update Activity clicked for ${lead['leadId']}");
-    // You can navigate to another page or show a dialog
   }
 
   void _onViewSummary(Map<String, dynamic> lead) {
