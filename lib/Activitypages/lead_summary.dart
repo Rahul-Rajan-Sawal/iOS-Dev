@@ -23,6 +23,7 @@ class _LeadSummaryState extends State<LeadSummary> {
   Widget build(BuildContext context) {
 
     return  Scaffold(
+        backgroundColor: Colors.grey[300],
         appBar: AppBar(
         title: const Text("Leads Summary"),
         elevation: 0,
@@ -69,7 +70,7 @@ class _LeadSummaryState extends State<LeadSummary> {
                                   children: [
                                     const SizedBox(height:50),
                                     const Text(
-                                      "Lead Detail",
+                                      "Customer Detail",
                                       style: TextStyle(
                                         color: Color(0xFF17479E),
                                         fontSize: 18,
@@ -90,7 +91,7 @@ class _LeadSummaryState extends State<LeadSummary> {
                                             EdgeInsets.symmetric(
                                                 vertical: 5),
                                         child: Text(
-                                          "Product",
+                                          "Customer Name",
                                           style: TextStyle(
                                             fontSize: 15,
                                             fontWeight:
@@ -106,7 +107,7 @@ class _LeadSummaryState extends State<LeadSummary> {
                                             EdgeInsets.symmetric(
                                                 vertical: 5),
                                         child: Text(
-                                          ":policyName",
+                                          ": Rahul Sawal",
                                           style: TextStyle(
                                             fontSize: 15,
                                             fontWeight:
@@ -128,9 +129,9 @@ class _LeadSummaryState extends State<LeadSummary> {
                                       child: Padding(
                                         padding:
                                             EdgeInsets.fromLTRB(
-                                                0, 8, 0, 15),
+                                                0, 8, 0, 5),
                                         child: Text(
-                                          "Policy Number",
+                                          "Customer Type",
                                           style: TextStyle(
                                             fontSize: 15,
                                             fontWeight:
@@ -144,9 +145,9 @@ class _LeadSummaryState extends State<LeadSummary> {
                                       child: Padding(
                                         padding:
                                             EdgeInsets.fromLTRB(
-                                                0, 8, 0, 15),
+                                                0, 8, 0, 5),
                                         child: Text(
-                                          ": policyNumber",
+                                          ": Not Available",
                                           style: TextStyle(
                                             fontSize: 15,
                                             fontWeight:
@@ -166,9 +167,9 @@ class _LeadSummaryState extends State<LeadSummary> {
                                     const SizedBox (
                                       width:150,
                                       child: Padding(
-                                        padding:EdgeInsets.fromLTRB(0,8,0,15),
+                                        padding:EdgeInsets.fromLTRB(0,8,0,5),
                                         child:Text(
-                                          "Lead Type",
+                                          "Customer Contact Number",
                                           style:TextStyle(
                                             fontSize:15,
                                           fontWeight:FontWeight.w600,
@@ -181,7 +182,7 @@ class _LeadSummaryState extends State<LeadSummary> {
                                      Expanded(
                                       child:Padding(padding:EdgeInsets.fromLTRB(0,8,0,15),
                                       child:Text(
-                                        ": leadType",
+                                        ": 89504938948",
                                         style:TextStyle(
                                           fontSize:15,
                                         fontWeight:FontWeight.w600,
@@ -200,7 +201,7 @@ class _LeadSummaryState extends State<LeadSummary> {
                                       child: Padding(
                                         padding:EdgeInsets.fromLTRB(0,8,0,15),
                                         child:Text(
-                                          "Premium",
+                                          "Customer Priority",
                                           style:TextStyle(
                                             fontSize:15,
                                           fontWeight:FontWeight.w600,
@@ -213,7 +214,7 @@ class _LeadSummaryState extends State<LeadSummary> {
                                      Expanded(
                                       child:Padding(padding:EdgeInsets.fromLTRB(0,8,0,15),
                                       child:Text(
-                                        ":premium",
+                                        ": Premier",
                                         style:TextStyle(
                                           fontSize:15,
                                         fontWeight:FontWeight.w600,
@@ -223,108 +224,7 @@ class _LeadSummaryState extends State<LeadSummary> {
                                       )
                                     )
                                   ],
-                                ),
-
-                              Row(
-                                  crossAxisAlignment:CrossAxisAlignment.start,
-                                  children:[
-                                    const SizedBox (
-                                      width:150,
-                                      child: Padding(
-                                        padding:EdgeInsets.fromLTRB(0,8,0,15),
-                                        child:Text(
-                                          "Vehicle Make & Model",
-                                          style:TextStyle(
-                                            fontSize:15,
-                                          fontWeight:FontWeight.w600,
-                                          color:Colors.grey,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-
-                                     Expanded(
-                                      child:Padding(padding:EdgeInsets.fromLTRB(0,8,0,15),
-                                      child:Text(
-                                        ":vehicleMakeModel",
-                                        style:TextStyle(
-                                          fontSize:15,
-                                        fontWeight:FontWeight.w600,
-                                        color:Color(0xFF17479E),
-                                        )
-                                      ),
-                                      )
-                                    )
-                                  ],
-                            ),
-
-                            Row(
-                                  crossAxisAlignment:CrossAxisAlignment.start,
-                                  children:[
-                                    const SizedBox (
-                                      width:150,
-                                      child: Padding(
-                                        padding:EdgeInsets.fromLTRB(0,8,0,15),
-                                        child:Text(
-                                          "NCB",
-                                          style:TextStyle(
-                                            fontSize:15,
-                                          fontWeight:FontWeight.w600,
-                                          color:Colors.grey,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-
-                                     Expanded(
-                                      child:Padding(padding:EdgeInsets.fromLTRB(0,8,0,15),
-                                      child:Text(
-                                        ":ncb",
-                                        style:TextStyle(
-                                          fontSize:15,
-                                        fontWeight:FontWeight.w600,
-                                        color:Color(0xFF17479E),
-                                        )
-                                      ),
-                                      )
-                                    )
-                                  ],
-                            ),
-
-                              Row(
-                                  crossAxisAlignment:CrossAxisAlignment.start,
-                                  children:[
-                                    const SizedBox (
-                                      width:150,
-                                      child: Padding(
-                                        padding:EdgeInsets.fromLTRB(0,8,0,15),
-                                        child:Text(
-                                          "Add-On",
-                                          style:TextStyle(
-                                            fontSize:15,
-                                          fontWeight:FontWeight.w600,
-                                          color:Colors.grey,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-
-                                     Expanded(
-                                      child:Padding(padding:EdgeInsets.fromLTRB(0,8,0,15),
-                                      child:Text(
-                                        ":addOn",
-                                        style:TextStyle(
-                                          fontSize:15,
-                                        fontWeight:FontWeight.w600,
-                                        color:Color(0xFF17479E),
-                                        )
-                                      ),
-                                      )
-                                    )
-                                  ],
-                            ),
-
-
+                                ),                            
                               ],
                             ),
                           ),
@@ -347,7 +247,7 @@ class _LeadSummaryState extends State<LeadSummary> {
                                   children: [
                                     const SizedBox(height:50),
                                     const Text(
-                                      "Lead Detail",
+                                      "Product Lead Detail",
                                       style: TextStyle(
                                         color: Color(0xFF17479E),
                                         fontSize: 18,
@@ -368,7 +268,7 @@ class _LeadSummaryState extends State<LeadSummary> {
                                             EdgeInsets.symmetric(
                                                 vertical: 5),
                                         child: Text(
-                                          "Product",
+                                          "Line of Business",
                                           style: TextStyle(
                                             fontSize: 15,
                                             fontWeight:
@@ -384,7 +284,7 @@ class _LeadSummaryState extends State<LeadSummary> {
                                             EdgeInsets.symmetric(
                                                 vertical: 5),
                                         child: Text(
-                                          ":policyName",
+                                          ": Motor",
                                           style: TextStyle(
                                             fontSize: 15,
                                             fontWeight:
@@ -406,9 +306,9 @@ class _LeadSummaryState extends State<LeadSummary> {
                                       child: Padding(
                                         padding:
                                             EdgeInsets.fromLTRB(
-                                                0, 8, 0, 15),
+                                                0, 8, 0, 5),
                                         child: Text(
-                                          "Policy Number",
+                                          "Product",
                                           style: TextStyle(
                                             fontSize: 15,
                                             fontWeight:
@@ -422,9 +322,9 @@ class _LeadSummaryState extends State<LeadSummary> {
                                       child: Padding(
                                         padding:
                                             EdgeInsets.fromLTRB(
-                                                0, 8, 0, 15),
+                                                0, 8, 0, 5),
                                         child: Text(
-                                          ": policyNumber",
+                                          ": HDFC ERGO Motor Insurance",
                                           style: TextStyle(
                                             fontSize: 15,
                                             fontWeight:
@@ -444,7 +344,7 @@ class _LeadSummaryState extends State<LeadSummary> {
                                     const SizedBox (
                                       width:150,
                                       child: Padding(
-                                        padding:EdgeInsets.fromLTRB(0,8,0,15),
+                                        padding:EdgeInsets.fromLTRB(0,8,0,5),
                                         child:Text(
                                           "Lead Type",
                                           style:TextStyle(
@@ -457,9 +357,9 @@ class _LeadSummaryState extends State<LeadSummary> {
                                     ),
 
                                      Expanded(
-                                      child:Padding(padding:EdgeInsets.fromLTRB(0,8,0,15),
+                                      child:Padding(padding:EdgeInsets.fromLTRB(0,8,0,5),
                                       child:Text(
-                                        ": leadType",
+                                        ": Contact",
                                         style:TextStyle(
                                           fontSize:15,
                                         fontWeight:FontWeight.w600,
@@ -476,9 +376,9 @@ class _LeadSummaryState extends State<LeadSummary> {
                                     const SizedBox (
                                       width:150,
                                       child: Padding(
-                                        padding:EdgeInsets.fromLTRB(0,8,0,15),
+                                        padding:EdgeInsets.fromLTRB(0,8,0,5),
                                         child:Text(
-                                          "Premium",
+                                          "Sale Type",
                                           style:TextStyle(
                                             fontSize:15,
                                           fontWeight:FontWeight.w600,
@@ -489,9 +389,9 @@ class _LeadSummaryState extends State<LeadSummary> {
                                     ),
 
                                      Expanded(
-                                      child:Padding(padding:EdgeInsets.fromLTRB(0,8,0,15),
+                                      child:Padding(padding:EdgeInsets.fromLTRB(0,8,0,5),
                                       child:Text(
-                                        ":premium",
+                                        ": Not Available",
                                         style:TextStyle(
                                           fontSize:15,
                                         fontWeight:FontWeight.w600,
@@ -509,9 +409,9 @@ class _LeadSummaryState extends State<LeadSummary> {
                                     const SizedBox (
                                       width:150,
                                       child: Padding(
-                                        padding:EdgeInsets.fromLTRB(0,8,0,15),
+                                        padding:EdgeInsets.fromLTRB(0,8,0,5),
                                         child:Text(
-                                          "Vehicle Make & Model",
+                                          "Policy Number",
                                           style:TextStyle(
                                             fontSize:15,
                                           fontWeight:FontWeight.w600,
@@ -522,9 +422,9 @@ class _LeadSummaryState extends State<LeadSummary> {
                                     ),
 
                                      Expanded(
-                                      child:Padding(padding:EdgeInsets.fromLTRB(0,8,0,15),
+                                      child:Padding(padding:EdgeInsets.fromLTRB(0,8,0,5),
                                       child:Text(
-                                        ":vehicleMakeModel",
+                                        ": 642438736248264772",
                                         style:TextStyle(
                                           fontSize:15,
                                         fontWeight:FontWeight.w600,
@@ -542,9 +442,9 @@ class _LeadSummaryState extends State<LeadSummary> {
                                     const SizedBox (
                                       width:150,
                                       child: Padding(
-                                        padding:EdgeInsets.fromLTRB(0,8,0,15),
+                                        padding:EdgeInsets.fromLTRB(0,8,0,5),
                                         child:Text(
-                                          "NCB",
+                                          "Lead Amount",
                                           style:TextStyle(
                                             fontSize:15,
                                           fontWeight:FontWeight.w600,
@@ -555,9 +455,9 @@ class _LeadSummaryState extends State<LeadSummary> {
                                     ),
 
                                      Expanded(
-                                      child:Padding(padding:EdgeInsets.fromLTRB(0,8,0,15),
+                                      child:Padding(padding:EdgeInsets.fromLTRB(0,8,0,5),
                                       child:Text(
-                                        ":ncb",
+                                        ": 83749483.00",
                                         style:TextStyle(
                                           fontSize:15,
                                         fontWeight:FontWeight.w600,
@@ -575,9 +475,9 @@ class _LeadSummaryState extends State<LeadSummary> {
                                     const SizedBox (
                                       width:150,
                                       child: Padding(
-                                        padding:EdgeInsets.fromLTRB(0,8,0,15),
+                                        padding:EdgeInsets.fromLTRB(0,8,0,5),
                                         child:Text(
-                                          "Add-On",
+                                          "Lead Owner",
                                           style:TextStyle(
                                             fontSize:15,
                                           fontWeight:FontWeight.w600,
@@ -588,9 +488,170 @@ class _LeadSummaryState extends State<LeadSummary> {
                                     ),
 
                                      Expanded(
-                                      child:Padding(padding:EdgeInsets.fromLTRB(0,8,0,15),
+                                      child:Padding(padding:EdgeInsets.fromLTRB(0,8,0,5),
                                       child:Text(
-                                        ":addOn",
+                                        ": 707(dvbbfbsd)",
+                                        style:TextStyle(
+                                          fontSize:15,
+                                        fontWeight:FontWeight.w600,
+                                        color:Color(0xFF17479E),
+                                        )
+                                      ),
+                                      )
+                                    )
+                                  ],
+                            ),
+
+                            Row(
+                                  crossAxisAlignment:CrossAxisAlignment.start,
+                                  children:[
+                                    const SizedBox (
+                                      width:150,
+                                      child: Padding(
+                                        padding:EdgeInsets.fromLTRB(0,8,0,5),
+                                        child:Text(
+                                          "Lead Assigned To",
+                                          style:TextStyle(
+                                            fontSize:15,
+                                          fontWeight:FontWeight.w600,
+                                          color:Colors.grey,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+
+                                     Expanded(
+                                      child:Padding(padding:EdgeInsets.fromLTRB(0,8,0,5),
+                                      child:Text(
+                                        ": Not Available",
+                                        style:TextStyle(
+                                          fontSize:15,
+                                        fontWeight:FontWeight.w600,
+                                        color:Color(0xFF17479E),
+                                        )
+                                      ),
+                                      )
+                                    )
+                                  ],
+                            ),
+                            Row(
+                                  crossAxisAlignment:CrossAxisAlignment.start,
+                                  children:[
+                                    const SizedBox (
+                                      width:150,
+                                      child: Padding(
+                                        padding:EdgeInsets.fromLTRB(0,8,0,5),
+                                        child:Text(
+                                          "Lead Channel",
+                                          style:TextStyle(
+                                            fontSize:15,
+                                          fontWeight:FontWeight.w600,
+                                          color:Colors.grey,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+
+                                     Expanded(
+                                      child:Padding(padding:EdgeInsets.fromLTRB(0,8,0,5),
+                                      child:Text(
+                                        ": Existing Customer/Renewal Data",
+                                        style:TextStyle(
+                                          fontSize:15,
+                                        fontWeight:FontWeight.w600,
+                                        color:Color(0xFF17479E),
+                                        )
+                                      ),
+                                      )
+                                    )
+                                  ],
+                            ),
+                            Row(
+                                  crossAxisAlignment:CrossAxisAlignment.start,
+                                  children:[
+                                    const SizedBox (
+                                      width:150,
+                                      child: Padding(
+                                        padding:EdgeInsets.fromLTRB(0,8,0,5),
+                                        child:Text(
+                                          "Lead Source",
+                                          style:TextStyle(
+                                            fontSize:15,
+                                          fontWeight:FontWeight.w600,
+                                          color:Colors.grey,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+
+                                     Expanded(
+                                      child:Padding(padding:EdgeInsets.fromLTRB(0,8,0,5),
+                                      child:Text(
+                                        ": Renewal Retention",
+                                        style:TextStyle(
+                                          fontSize:15,
+                                        fontWeight:FontWeight.w600,
+                                        color:Color(0xFF17479E),
+                                        )
+                                      ),
+                                      )
+                                    )
+                                  ],
+                            ),
+                            Row(
+                                  crossAxisAlignment:CrossAxisAlignment.start,
+                                  children:[
+                                    const SizedBox (
+                                      width:150,
+                                      child: Padding(
+                                        padding:EdgeInsets.fromLTRB(0,8,0,5),
+                                        child:Text(
+                                          "Lead Sub Source",
+                                          style:TextStyle(
+                                            fontSize:15,
+                                          fontWeight:FontWeight.w600,
+                                          color:Colors.grey,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+
+                                     Expanded(
+                                      child:Padding(padding:EdgeInsets.fromLTRB(0,8,0,5),
+                                      child:Text(
+                                        ": Apr 2026",
+                                        style:TextStyle(
+                                          fontSize:15,
+                                        fontWeight:FontWeight.w600,
+                                        color:Color(0xFF17479E),
+                                        )
+                                      ),
+                                      )
+                                    )
+                                  ],
+                            ),
+                            Row(
+                                  crossAxisAlignment:CrossAxisAlignment.start,
+                                  children:[
+                                    const SizedBox (
+                                      width:150,
+                                      child: Padding(
+                                        padding:EdgeInsets.fromLTRB(0,8,0,5),
+                                        child:Text(
+                                          "Lead Aging",
+                                          style:TextStyle(
+                                            fontSize:15,
+                                          fontWeight:FontWeight.w600,
+                                          color:Colors.grey,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+
+                                     Expanded(
+                                      child:Padding(padding:EdgeInsets.fromLTRB(0,8,0,5),
+                                      child:Text(
+                                        ": Created 2 week 5 days 8 hours,20 minutes ago.",
                                         style:TextStyle(
                                           fontSize:15,
                                         fontWeight:FontWeight.w600,
@@ -608,6 +669,8 @@ class _LeadSummaryState extends State<LeadSummary> {
                           ),
             ),
             const SizedBox(height: 16),
+
+
             Card(
                           elevation: 4,
                           shape: RoundedRectangleBorder(
@@ -625,7 +688,7 @@ class _LeadSummaryState extends State<LeadSummary> {
                                   children: [
                                     const SizedBox(height:50),
                                     const Text(
-                                      "Lead Detail",
+                                      "Other Details",
                                       style: TextStyle(
                                         color: Color(0xFF17479E),
                                         fontSize: 18,
@@ -646,7 +709,7 @@ class _LeadSummaryState extends State<LeadSummary> {
                                             EdgeInsets.symmetric(
                                                 vertical: 5),
                                         child: Text(
-                                          "Product",
+                                          "Business Type",
                                           style: TextStyle(
                                             fontSize: 15,
                                             fontWeight:
@@ -662,7 +725,7 @@ class _LeadSummaryState extends State<LeadSummary> {
                                             EdgeInsets.symmetric(
                                                 vertical: 5),
                                         child: Text(
-                                          ":policyName",
+                                          ": Renewal",
                                           style: TextStyle(
                                             fontSize: 15,
                                             fontWeight:
@@ -684,9 +747,9 @@ class _LeadSummaryState extends State<LeadSummary> {
                                       child: Padding(
                                         padding:
                                             EdgeInsets.fromLTRB(
-                                                0, 8, 0, 15),
+                                                0, 8, 0, 5),
                                         child: Text(
-                                          "Policy Number",
+                                          "Lead Rating",
                                           style: TextStyle(
                                             fontSize: 15,
                                             fontWeight:
@@ -695,14 +758,15 @@ class _LeadSummaryState extends State<LeadSummary> {
                                           ),
                                         ),
                                       ),
+                                      
                                     ),
                                      Expanded(
                                       child: Padding(
                                         padding:
                                             EdgeInsets.fromLTRB(
-                                                0, 8, 0, 15),
+                                                0, 8, 0, 5),
                                         child: Text(
-                                          ": policyNumber",
+                                          ": Not Available",
                                           style: TextStyle(
                                             fontSize: 15,
                                             fontWeight:
@@ -722,9 +786,9 @@ class _LeadSummaryState extends State<LeadSummary> {
                                     const SizedBox (
                                       width:150,
                                       child: Padding(
-                                        padding:EdgeInsets.fromLTRB(0,8,0,15),
+                                        padding:EdgeInsets.fromLTRB(0,8,0,5),
                                         child:Text(
-                                          "Lead Type",
+                                          "Breaking",
                                           style:TextStyle(
                                             fontSize:15,
                                           fontWeight:FontWeight.w600,
@@ -735,9 +799,9 @@ class _LeadSummaryState extends State<LeadSummary> {
                                     ),
 
                                      Expanded(
-                                      child:Padding(padding:EdgeInsets.fromLTRB(0,8,0,15),
+                                      child:Padding(padding:EdgeInsets.fromLTRB(0,8,0,5),
                                       child:Text(
-                                        ": leadType",
+                                        ": Not Available",
                                         style:TextStyle(
                                           fontSize:15,
                                         fontWeight:FontWeight.w600,
@@ -754,9 +818,9 @@ class _LeadSummaryState extends State<LeadSummary> {
                                     const SizedBox (
                                       width:150,
                                       child: Padding(
-                                        padding:EdgeInsets.fromLTRB(0,8,0,15),
+                                        padding:EdgeInsets.fromLTRB(0,8,0,5),
                                         child:Text(
-                                          "Premium",
+                                          "Previous policy Number",
                                           style:TextStyle(
                                             fontSize:15,
                                           fontWeight:FontWeight.w600,
@@ -767,9 +831,9 @@ class _LeadSummaryState extends State<LeadSummary> {
                                     ),
 
                                      Expanded(
-                                      child:Padding(padding:EdgeInsets.fromLTRB(0,8,0,15),
+                                      child:Padding(padding:EdgeInsets.fromLTRB(0,8,0,5),
                                       child:Text(
-                                        ":premium",
+                                        ": 749856483892738467",
                                         style:TextStyle(
                                           fontSize:15,
                                         fontWeight:FontWeight.w600,
@@ -787,9 +851,9 @@ class _LeadSummaryState extends State<LeadSummary> {
                                     const SizedBox (
                                       width:150,
                                       child: Padding(
-                                        padding:EdgeInsets.fromLTRB(0,8,0,15),
+                                        padding:EdgeInsets.fromLTRB(0,8,0,5),
                                         child:Text(
-                                          "Vehicle Make & Model",
+                                          "Website Quotes",
                                           style:TextStyle(
                                             fontSize:15,
                                           fontWeight:FontWeight.w600,
@@ -800,9 +864,9 @@ class _LeadSummaryState extends State<LeadSummary> {
                                     ),
 
                                      Expanded(
-                                      child:Padding(padding:EdgeInsets.fromLTRB(0,8,0,15),
+                                      child:Padding(padding:EdgeInsets.fromLTRB(0,8,0,5),
                                       child:Text(
-                                        ":vehicleMakeModel",
+                                        ": Not Available",
                                         style:TextStyle(
                                           fontSize:15,
                                         fontWeight:FontWeight.w600,
@@ -813,74 +877,7 @@ class _LeadSummaryState extends State<LeadSummary> {
                                     )
                                   ],
                             ),
-
-                            Row(
-                                  crossAxisAlignment:CrossAxisAlignment.start,
-                                  children:[
-                                    const SizedBox (
-                                      width:150,
-                                      child: Padding(
-                                        padding:EdgeInsets.fromLTRB(0,8,0,15),
-                                        child:Text(
-                                          "NCB",
-                                          style:TextStyle(
-                                            fontSize:15,
-                                          fontWeight:FontWeight.w600,
-                                          color:Colors.grey,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-
-                                     Expanded(
-                                      child:Padding(padding:EdgeInsets.fromLTRB(0,8,0,15),
-                                      child:Text(
-                                        ":ncb",
-                                        style:TextStyle(
-                                          fontSize:15,
-                                        fontWeight:FontWeight.w600,
-                                        color:Color(0xFF17479E),
-                                        )
-                                      ),
-                                      )
-                                    )
-                                  ],
-                            ),
-
-                              Row(
-                                  crossAxisAlignment:CrossAxisAlignment.start,
-                                  children:[
-                                    const SizedBox (
-                                      width:150,
-                                      child: Padding(
-                                        padding:EdgeInsets.fromLTRB(0,8,0,15),
-                                        child:Text(
-                                          "Add-On",
-                                          style:TextStyle(
-                                            fontSize:15,
-                                          fontWeight:FontWeight.w600,
-                                          color:Colors.grey,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-
-                                     Expanded(
-                                      child:Padding(padding:EdgeInsets.fromLTRB(0,8,0,15),
-                                      child:Text(
-                                        ":addOn",
-                                        style:TextStyle(
-                                          fontSize:15,
-                                        fontWeight:FontWeight.w600,
-                                        color:Color(0xFF17479E),
-                                        )
-                                      ),
-                                      )
-                                    )
-                                  ],
-                            ),
-
-
+                          
                               ],
                             ),
                           ),
