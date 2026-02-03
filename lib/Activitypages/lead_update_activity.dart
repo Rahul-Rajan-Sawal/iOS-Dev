@@ -10,11 +10,10 @@ class LeadUpdate extends StatefulWidget {
 }
 
 class _LeadUpdateState extends State<LeadUpdate> {
-  // ================= STATE =================
+
   String? selectedActivity;
   String? selectedSubActivity;
 
-  // ================= CONTROLLERS =================
   final TextEditingController policyNumberCtrl = TextEditingController();
   final TextEditingController instrumentNumberCtrl = TextEditingController();
   final TextEditingController instrumentAmountCtrl = TextEditingController();
@@ -27,14 +26,13 @@ class _LeadUpdateState extends State<LeadUpdate> {
 
   
 
-  // ================= DROPDOWN DATA =================
   final List<String> activityList = [
     'Sale Closed',
     'Lead Open',
     'Lead Lost',
   ];
 
-  final List<String> saleClosedSub = ['Policy Issued'];
+  final List<String> saleClosedSub = ['Premium Collected','Policy Issued'];
   final List<String> leadLostSub = [
     'Lost to Competitor',
     'Customer Not Interested',
@@ -63,9 +61,9 @@ class _LeadUpdateState extends State<LeadUpdate> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            /// ================= COMMON HEADER =================
             buildLabel('Activity *'),
             buildDropdown(
+              'Activity *',
               fieldHeight,
               value: selectedActivity,
               items: activityList,
@@ -80,6 +78,7 @@ class _LeadUpdateState extends State<LeadUpdate> {
             if (selectedActivity != null) ...[
               buildLabel('Sub Activity *'),
               buildDropdown(
+                'Sub Activity *',
                 fieldHeight,
                 value: selectedSubActivity,
                 items: selectedActivity == 'Sale Closed'
@@ -95,12 +94,7 @@ class _LeadUpdateState extends State<LeadUpdate> {
 
             const SizedBox(height: 8),
 
-            /// ================= DYNAMIC SECTION =================
             buildDynamicSection(fieldHeight),
-
-            /// ================= COMMON FOOTER =================
-            // buildLabel('Remark *'),
-            // buildTextField(fieldHeight, remarkCtrl, maxLines: 2),
 
             buildButton('Save'),
           ],
@@ -109,7 +103,6 @@ class _LeadUpdateState extends State<LeadUpdate> {
     );
   }
 
-  // ================= DYNAMIC UI =================
   Widget buildDynamicSection(double fieldHeight) {
     switch (selectedActivity) {
       case 'Sale Closed':
@@ -131,10 +124,11 @@ class _LeadUpdateState extends State<LeadUpdate> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         buildLabel('Policy Number *'),
-        buildTextField(fieldHeight, policyNumberCtrl),
+        buildTextField(fieldHeight, policyNumberCtrl,'Policy Number *'),
 
         buildLabel('Instrument Type *'),
         buildDropdown(
+          'Instrument Type *',
           fieldHeight,
           value: null,
           items: ['Cheque', 'Online', 'Cash'],
@@ -142,13 +136,13 @@ class _LeadUpdateState extends State<LeadUpdate> {
         ),
 
         buildLabel('Instrument Number *'),
-        buildTextField(fieldHeight, instrumentNumberCtrl),
+        buildTextField(fieldHeight, instrumentNumberCtrl,'Instrument Number *'),
 
         buildLabel('Instrument Amount *'),
-        buildTextField(fieldHeight, instrumentAmountCtrl),
+        buildTextField(fieldHeight, instrumentAmountCtrl,'Instrument Amount *'),
 
         buildLabel('Remark *'),
-        buildTextField(fieldHeight, remarkCtrl),
+        buildTextField(fieldHeight, remarkCtrl,'Remark *'),
 
       ],
     );
@@ -160,10 +154,11 @@ class _LeadUpdateState extends State<LeadUpdate> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           buildLabel('Policy Number of Competitor'),
-          buildTextField(fieldHeight, competitorPolicyCtrl),
+          buildTextField(fieldHeight, competitorPolicyCtrl,'Policy Number of Competitor'),
 
           buildLabel('Company Name of Competitor'),
           buildDropdown(
+            'Company Name of Competitor',
             fieldHeight,
             value: null,
             items: ['HDFC', 'ICICI', 'LIC'],
@@ -171,9 +166,9 @@ class _LeadUpdateState extends State<LeadUpdate> {
           ),
 
           buildLabel('New Policy Enrd Date'),
-          buildDateField(fieldHeight, dateCtrl),
+          buildDateField('New Policy Enrd Date',fieldHeight, dateCtrl),
            buildLabel('Remark *'),
-        buildTextField(fieldHeight, remarkCtrl),
+        buildTextField(fieldHeight, remarkCtrl ,'Remark *'),
         ],
       );
       
@@ -190,23 +185,23 @@ class _LeadUpdateState extends State<LeadUpdate> {
       children: [
         if(selectedSubActivity=='Call Back')...[
         buildLabel('Call Back *'),
-        buildDateField(fieldHeight, callbackDateCrtl),
+        buildDateField('Call Back *',fieldHeight, callbackDateCrtl),
 
         buildLabel('Expected Closure Date *'),
-        buildDateField(fieldHeight, expclosdateCrtl),
+        buildDateField('Expected Closure Date ',fieldHeight, expclosdateCrtl),
         ],
 
         if(selectedSubActivity == 'Appointment Fixed')...[
           buildLabel('Appointment Date *'),
-          buildDateField(fieldHeight, appointDateCrtl),
+          buildDateField('Appointment Date *',fieldHeight, appointDateCrtl),
 
           buildLabel('Expected Closure Date *'),
-          buildDateField(fieldHeight, expclosdateCrtl),
+          buildDateField('Expected Closure Date *',fieldHeight, expclosdateCrtl),
 
         ],
         
         buildLabel('Remark *'),
-        buildTextField(fieldHeight, remarkCtrl),
+        buildTextField(fieldHeight, remarkCtrl,'Remark *'),
       ],
     );
     
@@ -230,9 +225,12 @@ class _LeadUpdateState extends State<LeadUpdate> {
 
   Widget buildTextField(
     double height,
-    TextEditingController controller, {
+    TextEditingController controller, 
+     String hintText,
+    {
     int maxLines = 1,
-  }) {
+    }) 
+  {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Material(
@@ -244,7 +242,9 @@ class _LeadUpdateState extends State<LeadUpdate> {
           child: TextField(
             controller: controller,
             maxLines: maxLines,
-            decoration: const InputDecoration(
+            decoration:  InputDecoration(
+              hintText: hintText, 
+              hintStyle: TextStyle(color: Colors.grey),
               border: OutlineInputBorder(borderSide: BorderSide.none),
               contentPadding: EdgeInsets.fromLTRB(12, 14, 12, 14),
             ),
@@ -255,6 +255,7 @@ class _LeadUpdateState extends State<LeadUpdate> {
   }
 
   Widget buildDropdown(
+    String hintText,
     double height, {
     required String? value,
     required List<String> items,
@@ -280,9 +281,10 @@ class _LeadUpdateState extends State<LeadUpdate> {
                 )
                 .toList(),
             onChanged: onChanged,
-            decoration: const InputDecoration(
+            decoration:  InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.fromLTRB(12, 14, 12, 14),
+              hintText: hintText, 
             ),
           ),
         ),
@@ -291,6 +293,7 @@ class _LeadUpdateState extends State<LeadUpdate> {
   }
 
   Widget buildDateField(
+    String hintText,
     double height,
     TextEditingController controller,
   ) {
@@ -305,10 +308,11 @@ class _LeadUpdateState extends State<LeadUpdate> {
           child: TextField(
             controller: controller,
             readOnly: true,
-            decoration: const InputDecoration(
+            decoration:  InputDecoration(
               suffixIcon: Icon(Icons.calendar_today),
               border: InputBorder.none,
               contentPadding: EdgeInsets.fromLTRB(12, 14, 12, 14),
+              hintText: hintText,
             ),
             onTap: () async {
               final date = await showDatePicker(

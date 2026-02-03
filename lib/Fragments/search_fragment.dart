@@ -46,7 +46,7 @@ List<Map<String, dynamic>> dummyLeadResponse = [
     "policynumber": "1232781927378",
     "leadtype": "Contact",
     "premium": 98956710.0,
-    "vehiclemakemodel": "Lamborghini Revuelto",
+    "vehiclemakemodel": "Koenigsegg Jesko Absolut",
     "ncb": "No",
     "addon": "Not Available",
     "activity": "N/A",
