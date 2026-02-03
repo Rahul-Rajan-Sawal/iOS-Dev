@@ -1,4 +1,4 @@
-import 'package:flutter_bottom_nav/core/network/key_decryptor.dart';
+import 'package:flutter_application_1/core/network/key_decryptor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppPreferences {

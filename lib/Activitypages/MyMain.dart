@@ -191,7 +191,7 @@ bottomNavigationBar: Stack(
     );
   }
 
-  // ---------------- Drawer List ----------------
+  // Drawer List 
 
   Widget _buildDrawerList() {
     return ListView.builder(
@@ -221,7 +221,7 @@ bottomNavigationBar: Stack(
     );
   }
 
-  // ---------------- Drawer Click Handler ----------------
+  // Drawer Click Handler 
 
   void _onDrawerItemTap(int index) {
     Navigator.pop(context);

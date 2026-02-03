@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:encrypt/encrypt.dart' as encrypt;
-import 'package:flutter_bottom_nav/core/static_variables.dart';
+import 'package:flutter_application_1/core/static_variables.dart';
 
 class KeyDecryptor {
   static String serverKey = "";

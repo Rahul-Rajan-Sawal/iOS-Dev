@@ -19,6 +19,10 @@ CalendarController _calendarController = CalendarController();
   String _nop = "...";
   String _gwp = "...";
 
+
+  late final DateTime firstDate;
+  late final DateTime lastDate;
+
   // Leads data
   int totalLeads = 13;
   int convertedLeads = 1;
@@ -41,6 +45,10 @@ CalendarController _calendarController = CalendarController();
     super.initState();
     _fetchData(); 
     _calendarController = CalendarController();
+
+    final now = DateTime.now();
+    firstDate = DateTime(now.year, now.month - 2, 1);  
+    lastDate = DateTime(now.year, now.month + 2, 0);   
 
   }
   @override
@@ -198,7 +206,7 @@ Widget build(BuildContext context) {
           // ✅ 
           TableCalendar(
   calendarController: _calendarController,
-  startingDayOfWeek: StartingDayOfWeek.monday,
+  startingDayOfWeek: StartingDayOfWeek.monday,   
   availableCalendarFormats: const {
     CalendarFormat.month: 'Month',
   },
@@ -206,6 +214,18 @@ Widget build(BuildContext context) {
     centerHeaderTitle: true,
     formatButtonVisible: false,
   ),
+    onVisibleDaysChanged: (first, last, format) {
+    final now = DateTime.now();
+    final earliest = DateTime(now.year, now.month - 2, 1);
+    final latest = DateTime(now.year, now.month + 3, 0);
+
+    if (first.isBefore(earliest)) {
+      _calendarController.setSelectedDay(earliest);
+    } else if (last.isAfter(latest)) {
+      _calendarController.setSelectedDay(latest);
+    }
+  },
+
   builders: CalendarBuilders( // 👈 IMPORTANT
     dayBuilder: (context, date, events) {
       final key = DateTime(date.year, date.month, date.day);
