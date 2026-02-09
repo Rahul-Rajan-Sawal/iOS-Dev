@@ -10,7 +10,6 @@ class LeadUpdate extends StatefulWidget {
 }
 
 class _LeadUpdateState extends State<LeadUpdate> {
-
   String? selectedActivity;
   String? selectedSubActivity;
 
@@ -24,15 +23,13 @@ class _LeadUpdateState extends State<LeadUpdate> {
   final TextEditingController appointDateCrtl = TextEditingController();
   final TextEditingController expclosdateCrtl = TextEditingController();
 
-  
-
   final List<String> activityList = [
     'Sale Closed',
     'Lead Open',
     'Lead Lost',
   ];
 
-  final List<String> saleClosedSub = ['Premium Collected','Policy Issued'];
+  final List<String> saleClosedSub = ['Premium Collected', 'Policy Issued'];
   final List<String> leadLostSub = [
     'Lost to Competitor',
     'Customer Not Interested',
@@ -47,8 +44,7 @@ class _LeadUpdateState extends State<LeadUpdate> {
 
   @override
   Widget build(BuildContext context) {
-    final double fieldHeight =
-        MediaQuery.of(context).size.height * 0.055;
+    final double fieldHeight = MediaQuery.of(context).size.height * 0.055;
 
     return Scaffold(
       backgroundColor: Colors.grey[300],
@@ -74,7 +70,6 @@ class _LeadUpdateState extends State<LeadUpdate> {
                 });
               },
             ),
-
             if (selectedActivity != null) ...[
               buildLabel('Sub Activity *'),
               buildDropdown(
@@ -84,18 +79,15 @@ class _LeadUpdateState extends State<LeadUpdate> {
                 items: selectedActivity == 'Sale Closed'
                     ? saleClosedSub
                     : selectedActivity == 'Lead Open'
-                    ? leadOpenSub
-                    : leadLostSub,
+                        ? leadOpenSub
+                        : leadLostSub,
                 onChanged: (val) {
                   setState(() => selectedSubActivity = val);
                 },
               ),
             ],
-
             const SizedBox(height: 8),
-
             buildDynamicSection(fieldHeight),
-
             buildButton('Save'),
           ],
         ),
@@ -124,8 +116,7 @@ class _LeadUpdateState extends State<LeadUpdate> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         buildLabel('Policy Number *'),
-        buildTextField(fieldHeight, policyNumberCtrl,'Policy Number *'),
-
+        buildTextField(fieldHeight, policyNumberCtrl, 'Policy Number *'),
         buildLabel('Instrument Type *'),
         buildDropdown(
           'Instrument Type *',
@@ -134,79 +125,63 @@ class _LeadUpdateState extends State<LeadUpdate> {
           items: ['Cheque', 'Online', 'Cash'],
           onChanged: (_) {},
         ),
-
         buildLabel('Instrument Number *'),
-        buildTextField(fieldHeight, instrumentNumberCtrl,'Instrument Number *'),
-
+        buildTextField(
+            fieldHeight, instrumentNumberCtrl, 'Instrument Number *'),
         buildLabel('Instrument Amount *'),
-        buildTextField(fieldHeight, instrumentAmountCtrl,'Instrument Amount *'),
-
+        buildTextField(
+            fieldHeight, instrumentAmountCtrl, 'Instrument Amount *'),
         buildLabel('Remark *'),
-        buildTextField(fieldHeight, remarkCtrl,'Remark *'),
-
+        buildTextField(fieldHeight, remarkCtrl, 'Remark *'),
       ],
     );
   }
 
   Widget buildLeadLostUI(double fieldHeight) {
-    
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          buildLabel('Policy Number of Competitor'),
-          buildTextField(fieldHeight, competitorPolicyCtrl,'Policy Number of Competitor'),
-
-          buildLabel('Company Name of Competitor'),
-          buildDropdown(
-            'Company Name of Competitor',
-            fieldHeight,
-            value: null,
-            items: ['HDFC', 'ICICI', 'LIC'],
-            onChanged: (_) {},
-          ),
-
-          buildLabel('New Policy Enrd Date'),
-          buildDateField('New Policy Enrd Date',fieldHeight, dateCtrl),
-           buildLabel('Remark *'),
-        buildTextField(fieldHeight, remarkCtrl ,'Remark *'),
-        ],
-      );
-      
-    
-
-   return const SizedBox();
-  }
-
-  Widget buildLeadOpenUI(double fieldHeight) {
-
-    
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if(selectedSubActivity=='Call Back')...[
-        buildLabel('Call Back *'),
-        buildDateField('Call Back *',fieldHeight, callbackDateCrtl),
-
-        buildLabel('Expected Closure Date *'),
-        buildDateField('Expected Closure Date ',fieldHeight, expclosdateCrtl),
-        ],
-
-        if(selectedSubActivity == 'Appointment Fixed')...[
-          buildLabel('Appointment Date *'),
-          buildDateField('Appointment Date *',fieldHeight, appointDateCrtl),
-
-          buildLabel('Expected Closure Date *'),
-          buildDateField('Expected Closure Date *',fieldHeight, expclosdateCrtl),
-
-        ],
-        
+        buildLabel('Policy Number of Competitor'),
+        buildTextField(
+            fieldHeight, competitorPolicyCtrl, 'Policy Number of Competitor'),
+        buildLabel('Company Name of Competitor'),
+        buildDropdown(
+          'Company Name of Competitor',
+          fieldHeight,
+          value: null,
+          items: ['HDFC', 'ICICI', 'LIC'],
+          onChanged: (_) {},
+        ),
+        buildLabel('New Policy Enrd Date'),
+        buildDateField('New Policy Enrd Date', fieldHeight, dateCtrl),
         buildLabel('Remark *'),
-        buildTextField(fieldHeight, remarkCtrl,'Remark *'),
+        buildTextField(fieldHeight, remarkCtrl, 'Remark *'),
       ],
     );
-    
-       return const SizedBox();
+  }
 
+  Widget buildLeadOpenUI(double fieldHeight) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (selectedSubActivity == 'Call Back') ...[
+          buildLabel('Call Back *'),
+          buildDateField('Call Back *', fieldHeight, callbackDateCrtl),
+          buildLabel('Expected Closure Date *'),
+          buildDateField(
+              'Expected Closure Date ', fieldHeight, expclosdateCrtl),
+        ],
+        if (selectedSubActivity == 'Appointment Fixed') ...[
+          buildLabel('Appointment Date *'),
+          buildDateField('Appointment Date *', fieldHeight, appointDateCrtl),
+          buildLabel('Expected Closure Date *'),
+          buildDateField(
+              'Expected Closure Date *', fieldHeight, expclosdateCrtl),
+        ],
+        buildLabel('Remark *'),
+        buildTextField(fieldHeight, remarkCtrl, 'Remark *'),
+      ],
+    );
   }
 
   Widget buildLabel(String text) {
@@ -225,12 +200,10 @@ class _LeadUpdateState extends State<LeadUpdate> {
 
   Widget buildTextField(
     double height,
-    TextEditingController controller, 
-     String hintText,
-    {
+    TextEditingController controller,
+    String hintText, {
     int maxLines = 1,
-    }) 
-  {
+  }) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Material(
@@ -242,8 +215,8 @@ class _LeadUpdateState extends State<LeadUpdate> {
           child: TextField(
             controller: controller,
             maxLines: maxLines,
-            decoration:  InputDecoration(
-              hintText: hintText, 
+            decoration: InputDecoration(
+              hintText: hintText,
               hintStyle: TextStyle(color: Colors.grey),
               border: OutlineInputBorder(borderSide: BorderSide.none),
               contentPadding: EdgeInsets.fromLTRB(12, 14, 12, 14),
@@ -281,10 +254,10 @@ class _LeadUpdateState extends State<LeadUpdate> {
                 )
                 .toList(),
             onChanged: onChanged,
-            decoration:  InputDecoration(
+            decoration: InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.fromLTRB(12, 14, 12, 14),
-              hintText: hintText, 
+              hintText: hintText,
             ),
           ),
         ),
@@ -308,7 +281,7 @@ class _LeadUpdateState extends State<LeadUpdate> {
           child: TextField(
             controller: controller,
             readOnly: true,
-            decoration:  InputDecoration(
+            decoration: InputDecoration(
               suffixIcon: Icon(Icons.calendar_today),
               border: InputBorder.none,
               contentPadding: EdgeInsets.fromLTRB(12, 14, 12, 14),
@@ -322,8 +295,7 @@ class _LeadUpdateState extends State<LeadUpdate> {
                 lastDate: DateTime(2100),
               );
               if (date != null) {
-                controller.text =
-                    '${date.day}/${date.month}/${date.year}';
+                controller.text = '${date.day}/${date.month}/${date.year}';
               }
             },
           ),
@@ -351,5 +323,4 @@ class _LeadUpdateState extends State<LeadUpdate> {
       ),
     );
   }
-
 }

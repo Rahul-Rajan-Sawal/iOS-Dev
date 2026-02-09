@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/apicall/async_get_api_values.dart';
-import 'package:flutter_application_1/core/network/key_decryptor.dart';
-import 'package:flutter_application_1/core/network/api_request_builder.dart';
-import 'package:flutter_application_1/core/storage/app_preferences.dart';
 import 'package:flutter_application_1/core/static_variables.dart';
-import 'package:flutter_application_1/Activitypages/view_details.dart';
 import 'package:flutter_application_1/Activitypages/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 
 //import 'Activitypages/login.dart';
 
@@ -15,18 +10,18 @@ class SplashscreenActivity extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _SplashScreenState();
 }
- 
+
 class _SplashScreenState extends State<SplashscreenActivity> {
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
- 
+
     AsyncGetApiValues(
       callback: (result) async {
         if (result == "Success") {
           await readPrefAndContinue();
- 
+
           Navigator.push(
             context,
             MaterialPageRoute(builder: (_) => Mylogin()),
@@ -37,10 +32,10 @@ class _SplashScreenState extends State<SplashscreenActivity> {
       },
     ).execute();
   }
- 
+
   Future<void> readPrefAndContinue() async {
     final prefs = await SharedPreferences.getInstance();
- 
+
     StaticVariables.cipherServer = prefs.getString("server");
     StaticVariables.pkcs5Padding = prefs.getString("pad");
     StaticVariables.apiKey = prefs.getString("api_key");
@@ -49,7 +44,7 @@ class _SplashScreenState extends State<SplashscreenActivity> {
     StaticVariables.authorization = prefs.getString("Authorization");
     StaticVariables.callerPass = prefs.getString("shared_key");
   }
- 
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -57,7 +52,7 @@ class _SplashScreenState extends State<SplashscreenActivity> {
     double scaleFont(double size) {
       return size * screenWidth / 400;
     }
- 
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -72,22 +67,17 @@ class _SplashScreenState extends State<SplashscreenActivity> {
                   fontWeight: FontWeight.w400,
                 ),
               ),
- 
               Text(
                 "Sign in to your account",
                 style: TextStyle(fontSize: scaleFont(12)),
               ),
- 
               SizedBox(height: screenHeight * 0.02),
- 
               Image.asset(
                 "assets/IGI_Logo.png",
                 height: screenHeight * 0.08,
                 fit: BoxFit.contain,
               ),
- 
               SizedBox(height: screenHeight * 0.04),
- 
               Text(
                 "Smart Tracker",
                 style: TextStyle(
@@ -96,18 +86,14 @@ class _SplashScreenState extends State<SplashscreenActivity> {
                   color: Colors.black,
                 ),
               ),
- 
               SizedBox(height: screenHeight * 0.06),
- 
               Image.asset(
                 "assets/loader_01.gif",
                 width: 150,
                 height: 150,
                 fit: BoxFit.contain,
               ),
- 
               SizedBox(height: screenHeight * 0.06),
- 
               Image.asset(
                 "assets/login_bg.png",
                 height: screenHeight * 0.30,
@@ -119,11 +105,10 @@ class _SplashScreenState extends State<SplashscreenActivity> {
       ),
     );
   }
- 
+
   void _showError() {
     ScaffoldMessenger.of(
       context,
     ).showSnackBar(const SnackBar(content: Text("Initialization failed")));
   }
 }
- 

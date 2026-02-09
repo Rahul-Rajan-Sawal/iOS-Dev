@@ -10,14 +10,16 @@ import 'package:flutter_application_1/Fragments/search_fragment.dart';
 import 'package:flutter_application_1/Fragments/setting_fragment.dart';
 import 'package:flutter_application_1/Activitypages/login.dart';
 import 'package:flutter_application_1/Popup/popup.dart';
+import 'package:flutter_application_1/core/static_variables.dart';
 
+import 'package:sqflite_sqlcipher/sqflite.dart';
 
 class MyMain extends StatefulWidget {
-  final String username;
+  final String user;
 
   const MyMain({
     Key? key,
-    required this.username,
+    required this.user,
   }) : super(key: key);
 
   @override
@@ -28,29 +30,34 @@ class _MyMainState extends State<MyMain> {
   int _currentIndex = 2;
   int _selectedDrawerIndex = 0;
 
+  void _printDbPath() async {
+    final path = await getDatabasesPath();
+    print('DB PATH: $path');
+  }
+
   late final List<Widget> _pages;
   void _showLogoutDialog() {
-  showDialog(
-    context: context,
-    barrierDismissible: false,
-    builder: (context) {
-      return CommonPopup(
-        title: "Logout",
-        message: "Do you want to logout?",
-        onNo: () {
-          Navigator.pop(context); // close dialog
-        },
-        onYes: () {
-          Navigator.pop(context); // close dialog
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (_) => const Mylogin()),
-          );
-        },
-      );
-    },
-  );
-}
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return CommonPopup(
+          title: "Logout",
+          message: "Do you want to logout?",
+          onNo: () {
+            Navigator.pop(context); // close dialog
+          },
+          onYes: () {
+            Navigator.pop(context); // close dialog
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (_) => const Mylogin()),
+            );
+          },
+        );
+      },
+    );
+  }
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -69,6 +76,7 @@ class _MyMainState extends State<MyMain> {
   @override
   void initState() {
     super.initState();
+    _printDbPath(); // 👈 ADD THIS LINE
 
     _pages = [
       const SearchFragment(),
@@ -88,7 +96,6 @@ class _MyMainState extends State<MyMain> {
 
     return Scaffold(
       key: _scaffoldKey,
-
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.menu, color: Colors.black, size: 35),
@@ -104,94 +111,91 @@ class _MyMainState extends State<MyMain> {
           fit: BoxFit.contain,
         ),
       ),
-
       drawer: Drawer(
         child: Column(
           children: [
-            MyHeaderDrawer(username: widget.username),
+            MyHeaderDrawer(
+              user: widget.user,
+              username: StaticVariables.mUserName,
+              designation: StaticVariables.mDesignation,
+            ),
             Expanded(child: _buildDrawerList()),
           ],
         ),
       ),
-
       body: SafeArea(
         child: IndexedStack(
           index: _currentIndex,
           children: _pages,
         ),
       ),
-
-
-bottomNavigationBar: Stack(
-  alignment: Alignment.bottomCenter,
-  children: [
-    Positioned.fill(
-      child: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Color(0xFF4A86FF),
-              Color(0xFF00C6FF),
-            ],
+      bottomNavigationBar: Stack(
+        alignment: Alignment.bottomCenter,
+        children: [
+          Positioned.fill(
+            child: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Color(0xFF4A86FF),
+                    Color(0xFF00C6FF),
+                  ],
+                ),
+              ),
+            ),
           ),
-        ),
+
+          CurvedNavigationBar(
+            index: _currentIndex,
+            height: navBarHeight,
+            color: Colors.white,
+            backgroundColor: Colors.transparent,
+            //backgroundColor: const Color(0xFF4A86FF),
+            buttonBackgroundColor: Colors.white,
+            animationDuration: const Duration(milliseconds: 300),
+
+            items: const [
+              Icon(Icons.search, color: Colors.black),
+              Icon(Icons.calendar_today, color: Colors.black),
+              Icon(Icons.dashboard, color: Colors.black, size: 32),
+              Icon(Icons.create, color: Colors.black),
+              Icon(Icons.settings, color: Colors.black),
+            ],
+
+            onTap: (index) {
+              setState(() {
+                _currentIndex = index;
+              });
+            },
+          ),
+
+          /// 🔹 Fixed labels (DO NOT MOVE)
+          Positioned(
+            bottom: 6,
+            left: 0,
+            right: 0,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  _BottomLabel(text: "Search"),
+                  _BottomLabel(text: "Calendar"),
+                  _BottomLabel(text: "Dashboard"),
+                  _BottomLabel(text: "Create Lead"),
+                  _BottomLabel(text: "Settings"),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
-    ),
-
-
-    CurvedNavigationBar(
-      index: _currentIndex,
-      height: navBarHeight,
-      color: Colors.white,
-      backgroundColor: Colors.transparent, // 👈 IMPORTANT
-      //backgroundColor: const Color(0xFF4A86FF),
-      buttonBackgroundColor: Colors.white,
-      animationDuration: const Duration(milliseconds: 300),
-
-      items: const [
-        Icon(Icons.search, color: Colors.black),
-        Icon(Icons.calendar_today, color: Colors.black),
-        Icon(Icons.dashboard, color: Colors.black, size: 32),
-        Icon(Icons.create, color: Colors.black),
-        Icon(Icons.settings, color: Colors.black),
-      ],
-
-      onTap: (index) {
-        setState(() {
-          _currentIndex = index;
-        });
-      },
-    ),
-
-    /// 🔹 Fixed labels (DO NOT MOVE)
-    Positioned(
-      bottom: 6,
-      left: 0,
-      right: 0,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: const [
-            _BottomLabel(text: "Search"),
-            _BottomLabel(text: "Calendar"),
-            _BottomLabel(text: "Dashboard"),
-            _BottomLabel(text: "Create Lead"),
-            _BottomLabel(text: "Settings"),
-          ],
-        ),
-      ),
-    ),
-  ],
-),
-
-
     );
   }
 
-  // Drawer List 
+  // Drawer List
 
   Widget _buildDrawerList() {
     return ListView.builder(
@@ -202,16 +206,12 @@ bottomNavigationBar: Stack(
         return ListTile(
           leading: Icon(
             item["icon"],
-            color: _selectedDrawerIndex == index
-                ? Colors.blue
-                : Colors.black,
+            color: _selectedDrawerIndex == index ? Colors.blue : Colors.black,
           ),
           title: Text(
             item["title"],
             style: TextStyle(
-              color: _selectedDrawerIndex == index
-                  ? Colors.blue
-                  : Colors.black,
+              color: _selectedDrawerIndex == index ? Colors.blue : Colors.black,
             ),
           ),
           selected: _selectedDrawerIndex == index,
@@ -221,7 +221,7 @@ bottomNavigationBar: Stack(
     );
   }
 
-  // Drawer Click Handler 
+  // Drawer Click Handler
 
   void _onDrawerItemTap(int index) {
     Navigator.pop(context);
@@ -259,7 +259,3 @@ class _BottomLabel extends StatelessWidget {
     );
   }
 }
-
-
-
-

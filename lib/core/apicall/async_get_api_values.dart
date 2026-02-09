@@ -2,7 +2,7 @@ import 'package:flutter_application_1/core/network/http_request_builder.dart';
 import 'package:flutter_application_1/core/network/key_decryptor.dart';
 import 'package:flutter_application_1/core/static_variables.dart';
 import 'package:flutter_application_1/core/storage/app_preferences.dart';
-import 'package:http/http.dart';
+//import 'package:http/http.dart';
 
 typedef ApiCallback = void Function(String result);
 

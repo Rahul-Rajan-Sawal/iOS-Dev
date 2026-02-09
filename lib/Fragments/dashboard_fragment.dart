@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Drawer/my_drawer_header.dart';
 
 import 'package:flutter_application_1/Services/AllServices.dart';
 // import 'package:flutter_bottom_nav/Activities/filter_activity.dart';
 // import 'package:fluttertoast/fluttertoast.dart';
 
 class DashboardScreen extends StatefulWidget {
- // const DashboardScreen({super.key});
+  // const DashboardScreen({super.key});
 
-
-
-   const DashboardScreen({
+  const DashboardScreen({
     Key? key,
   }) : super(key: key);
-
 
   @override
   State<StatefulWidget> createState() => _DashboardScreenState();
@@ -28,7 +24,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _fetchData();
   }
@@ -192,41 +187,39 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
         ),
         const SizedBox(height: 4),
-        Text(Value, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+        Text(Value,
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
       ],
     );
   }
 
-Widget _buildIcon() {
-  return InkWell(
-    onTap: () {
-      print("Filter clicked");
-      _onFilterClick(); // your function
-    },
-    borderRadius: BorderRadius.circular(8),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text(
-          "Filter",
-          style: const TextStyle(
-            fontSize: 12,
-            color: Color(0xFF17479e),
-            fontWeight: FontWeight.bold,
+  Widget _buildIcon() {
+    return InkWell(
+      onTap: () {
+        print("Filter clicked");
+        _onFilterClick(); // your function
+      },
+      borderRadius: BorderRadius.circular(8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            "Filter",
+            style: const TextStyle(
+              fontSize: 12,
+              color: Color(0xFF17479e),
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
-        const Icon(
-          Icons.filter_alt,
-          color: Colors.blue,
-          size: 28,
-        ),
-      ],
-    ),
-  );
-}
-
-
-  
+          const Icon(
+            Icons.filter_alt,
+            color: Colors.blue,
+            size: 28,
+          ),
+        ],
+      ),
+    );
+  }
 
   Widget _buildIconhorizontal(String flag) {
     String assetPath;
@@ -289,7 +282,6 @@ Widget _buildIcon() {
               ),
             ),
             const SizedBox(height: 6),
-
             Text(
               data.percentage,
               style: const TextStyle(
@@ -361,7 +353,6 @@ Widget _buildIcon() {
   }
 
   void _refreshData() {
-
     ToastService.showToast(context, message: "Refreshing Data...");
     // ScaffoldMessenger.of(context).showSnackBar(
     //   const SnackBar(
@@ -399,4 +390,3 @@ class CardData {
     required this.gwp,
   });
 }
-
