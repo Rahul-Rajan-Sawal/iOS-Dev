@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'MyMain.dart';
 import 'package:flutter_application_1/common/common_util.dart';
 import 'package:flutter_application_1/core/static_variables.dart';
 import 'package:flutter_application_1/core/apicall/authenticate_user.dart';
+import 'package:flutter_application_1/Activitypages/MyMain.dart';
 
 class Mylogin extends StatefulWidget {
   const Mylogin({Key? key}) : super(key: key);
@@ -109,7 +109,6 @@ class _MyloginState extends State<Mylogin> {
                 },
                 decoration: InputDecoration(
                   labelText: "User ID",
-                  labelStyle: TextStyle(color: Colors.grey[600]),
                   errorText: _userIdError ? _userIdErrorText : null,
                   border: OutlineInputBorder(),
                   focusedBorder: OutlineInputBorder(
@@ -217,7 +216,6 @@ class _MyloginState extends State<Mylogin> {
                       _passwordErrorText =
                           _passwordError ? "Password required" : "";
                     });
-                    if (_userIdError || _passwordError) return;
 
                     CommonUtil.show(context,
                         message: "Authenticating please wait");
@@ -234,9 +232,6 @@ class _MyloginState extends State<Mylogin> {
 
                       final json = table[0];
                       final message = json["Message"];
-
-                      if (!mounted) return;
-                      CommonUtil.hide(context);
 
                       if (message == "Outdated version found") {
                         showDialog(
@@ -273,22 +268,19 @@ class _MyloginState extends State<Mylogin> {
                         //"userId": CommonUtil.encryptIfNotEmpty(jsonObject["UserId"].toString().toUpperCase(),),
 
                         //}
-
+                        print("Function start");
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (_) => MyMain(user: userId),
                           ),
                         );
+                        print("Function end");
                       }
                     } catch (e) {
-                      if (mounted) {
-                        CommonUtil.hide(context);
-                      }
-
                       print(e);
                     }
-                    //CommonUtil.hide(context);
+                    CommonUtil.hide(context);
 
                     //if (_userIdError || _passwordError) return;
                   },

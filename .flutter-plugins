@@ -7,3 +7,4 @@ shared_preferences_linux=/Users/Apple/Ios_Dev/flutter/.pub-cache/hosted/pub.dart
 shared_preferences_macos=/Users/Apple/Ios_Dev/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_macos-2.0.2/
 shared_preferences_web=/Users/Apple/Ios_Dev/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_web-2.0.4/
 shared_preferences_windows=/Users/Apple/Ios_Dev/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_windows-2.0.4/
+sqflite_sqlcipher=/Users/Apple/Ios_Dev/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite_sqlcipher-1.1.4/

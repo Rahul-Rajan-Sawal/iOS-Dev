@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'Activitypages/login.dart';
 import 'Activitypages/splashscreen_activity.dart';
 
 void main() {
@@ -12,8 +11,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: SplashscreenActivity()
-    );
+        debugShowCheckedModeBanner: true, home: SplashscreenActivity());
   }
 }

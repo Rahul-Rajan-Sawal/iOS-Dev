@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 
 class MyHeaderDrawer extends StatefulWidget {
   final String username;
+  final String designation;
+  final String user;
 
   const MyHeaderDrawer({
     Key? key,
     required this.username,
+    required this.designation,
+    required this.user,
   }) : super(key: key);
 
   @override
@@ -34,19 +38,19 @@ class _MyHeaderDrawerState extends State<MyHeaderDrawer> {
                 )),
           ),
           Text(
-            "Sameer S",
-            style: TextStyle(
-                color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-          Text(
-            "( ${widget.username} )",
+            "${widget.username}",
             style: TextStyle(
                 color: Colors.white, fontSize: 17, fontWeight: FontWeight.bold),
           ),
           Text(
-            "Sales Manager",
+            "(${widget.user})",
             style: TextStyle(
-                color: Colors.white, fontSize: 17, fontWeight: FontWeight.bold),
+                color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
+          ),
+          Text(
+            "${widget.designation}",
+            style: TextStyle(
+                color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
           ),
         ],
       ),
