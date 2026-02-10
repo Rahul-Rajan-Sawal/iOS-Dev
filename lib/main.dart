@@ -1,7 +1,15 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'Activitypages/splashscreen_activity.dart';
+import 'DBShowingAPI/dbserver.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized(); // 👈 ADD
+
+  if (!kReleaseMode) {
+    DebugDbServer.start(); // 👈 ADD
+  }
+
   runApp(const MyApp());
 }
 

@@ -1,43 +1,38 @@
-
 import 'dart:convert';
 import 'package:flutter_application_1/common/encryption_util.dart';
 import 'package:flutter_application_1/core/static_variables.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_application_1/core/network/dio_client.dart';
 
-
-
-
-class  EncryptedHttpservice{
-
-
-  static Future<String>post({
+class EncryptedHttpservice {
+  static Future<String> post({
     required String url,
     required Map<String, dynamic> requestJson,
-
-  })async{
-    try{
+  }) async {
+    try {
+      print("ReqJson" + requestJson.toString());
       final encryptedJson = EncryptionUtil.encrypt(jsonEncode(requestJson));
 
-      final payload = {"jsonInput":encryptedJson};
-      
+      print("EncryptedJson: " + encryptedJson);
+      final payload = {"jsonInput": encryptedJson};
+
       final response = await DioClient.instance.post(
         url,
-        data:jsonEncode(payload),
+        data: jsonEncode(payload),
         options: Options(
-          headers: {"authorization" : StaticVariables.authorization},
+          headers: {"authorization": StaticVariables.authorization},
         ),
       );
 
+      print("response :  " + response.data.toString());
       final decrypted = EncryptionUtil.decrypt(response.data.toString());
 
       print("Decrypt: $decrypted");
 
       return decrypted;
-    } catch(e){
+    } catch (e) {
       print("Error: $e");
       rethrow;
     }
   }
 }
-

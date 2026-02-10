@@ -45,6 +45,9 @@ dependencies:
   #sqflite: ^2.0.0+4
   sqflite_sqlcipher: ^1.1.0
   path: ^1.8.0
+  shelf: ^1.1.0
+  shelf_router: ^1.1.0
+
         
   #sqflite_sqlcipher: 1.1.  4   
   #path: 1.8.0                
