@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/database/database_helper.dart';
 import 'MyMain.dart';
 import 'package:flutter_application_1/common/common_util.dart';
 import 'package:flutter_application_1/core/static_variables.dart';
@@ -227,6 +228,7 @@ class _MyloginState extends State<Mylogin> {
                           password: password,
                           appVersion: StaticVariables.appVersion);
 
+                      print("Responseee :" + response.toString());
                       final table = response["Table"];
                       if (table == null || table.isEmpty) {
                         throw "Invalid Server Response";
@@ -269,10 +271,56 @@ class _MyloginState extends State<Mylogin> {
                         final calenderUpdateDate = "";
                         final now = DateTime.now().toIso8601String();
 
-                        // final Map<String , dynamic> userData = {
-                        //"userId": CommonUtil.encryptIfNotEmpty(jsonObject["UserId"].toString().toUpperCase(),),
+                        final Map<String, dynamic> userData = {
+                          "userId": CommonUtil.encryptIfNotEmpty(
+                            jsonObject["UserId"].toString().toUpperCase(),
+                          ),
+                          "Password": CommonUtil.encryptIfNotEmpty(password),
+                          "UserName": CommonUtil.encryptIfNotEmpty(
+                              jsonObject["LegalName"]?.toString() ?? ""),
+                          "UserStatus": CommonUtil.encryptIfNotEmpty(
+                              jsonObject["UserStatus"]?.toString() ?? ""),
+                          "BranchName": CommonUtil.encryptIfNotEmpty(
+                              jsonObject["BranchName"]?.toString() ?? ""),
+                          "LastAccessdate": CommonUtil.encryptIfNotEmpty(now),
+                          "UserType": CommonUtil.encryptIfNotEmpty(
+                            jsonObject["UserRole"]?.toString() ?? "",
+                          ),
+                          "Createddtim": CommonUtil.encryptIfNotEmpty(now),
+                          "Createdby": CommonUtil.encryptIfNotEmpty(
+                            jsonObject["UserId"].toString().toUpperCase(),
+                          ),
+                          "RememberLogin": CommonUtil.encryptIfNotEmpty("Y"),
+                          "change_ver": CommonUtil.encryptIfNotEmpty(
+                            jsonObject["change_ver"]?.toString() ?? "",
+                          ),
+                          "MobileNo": CommonUtil.encryptIfNotEmpty(
+                            jsonObject["MobileNo"]?.toString() ?? "",
+                          ),
+                          "EmailID": CommonUtil.encryptIfNotEmpty(
+                            jsonObject["EmailID"]?.toString() ?? "",
+                          ),
+                          "Privacy_Flag": CommonUtil.encryptIfNotEmpty(
+                            jsonObject["Privacy_Flag"]?.toString() ?? "",
+                          ),
+                          "Schedule_Days": CommonUtil.encryptIfNotEmpty(
+                            jsonObject["Schedule_Days"]?.toString() ?? "",
+                          ),
+                          "Ren_Rem_Days": CommonUtil.encryptIfNotEmpty(
+                            jsonObject["Ren_Rem_Days"]?.toString() ?? "",
+                          ),
+                          "DashboardUpdatedDate": CommonUtil.encryptIfNotEmpty(
+                              dashboardUpdatedDate),
+                          "CalendarUpdatedDate":
+                              CommonUtil.encryptIfNotEmpty(calenderUpdateDate),
+                          "TokenId": CommonUtil.encryptIfNotEmpty(
+                            jsonObject["TokenId"]?.toString() ?? "",
+                          ),
+                        };
 
-                        //}
+                        final db = await DatabaseHelper.instance.database;
+                        await db.delete("iUser");
+                        await db.insert("iUser", userData);
 
                         Navigator.push(
                           context,
