@@ -7,7 +7,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized(); // 👈 ADD
 
   if (!kReleaseMode) {
-    DebugDbServer.start(); // 👈 ADD
+    DebugDbServer.start();
   }
 
   runApp(const MyApp());

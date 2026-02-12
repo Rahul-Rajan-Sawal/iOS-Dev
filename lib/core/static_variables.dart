@@ -31,5 +31,5 @@ class StaticVariables {
   static String callerId = "NiftyLmsAndroid";
 
   static const DbName = "LMS.db";
-  static const DbVersion = 1;
+  static const DbVersion = 5;
 }
