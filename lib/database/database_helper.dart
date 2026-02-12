@@ -18,6 +18,8 @@ class DatabaseHelper {
 
 //Used whenever DB is needed in the app
   Future<Database> get database async {
+    print("DB Helper Called");
+
     //if database already initiated then return it
     // ! in return stattement promise this value is not null at this point.
     if (_database != null) return _database!;
@@ -62,12 +64,30 @@ class DatabaseHelper {
 
   Future<void> _onCreate(Database db, int version) async {
     //Execute eaw sql
+    print("Running table creator         -----------------------");
     await db.execute(DbTables.createUserTable);
+    // LEAD DETAILS TABLE
+    try {
+      await db.execute(DbTables.ceadDetails);
+    } catch (e) {
+      print("exception catched :  $e");
+    }
+
+    // ACTIVITY TRACKER TABLE
+    await db.execute(DbTables.lmsLeadActivityTracker);
   }
 
   //if
   Future<void> _onUpgrade(Database db, int oldVersion, int newVersion) async {
+    //await db.execute(DbTables.dropUserTable);
+    //await db.execute(DbTables.LeadDetails);
+    //await db.execute(DbTables.LMSLeadActivityTracker);
+    //await _onCreate(db, newVersion);
+
     await db.execute(DbTables.dropUserTable);
+    await db.execute(DbTables.dropLeadDetails);
+    await db.execute(DbTables.dropLMSLeadActivityTracker);
+
     await _onCreate(db, newVersion);
   }
 }

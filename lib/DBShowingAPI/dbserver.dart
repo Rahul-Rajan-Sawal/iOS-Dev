@@ -10,7 +10,7 @@ class DebugDbServer {
 
     router.get('/users', (Request request) async {
       final db = await DatabaseHelper.instance.database;
-      final data = await db.query('iUser');
+      final data = await db.query('LMSLeadActivityTracker');
       return Response.ok(data.toString());
     });
 

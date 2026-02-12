@@ -4,7 +4,11 @@ import 'package:flutter_application_1/Popup/popup.dart';
 import 'package:flutter_application_1/common/common_util.dart';
 import 'package:flutter_application_1/core/apicall/getsearchdata.dart';
 import 'package:flutter_application_1/core/static_variables.dart';
+import 'package:flutter_application_1/database/database_helper.dart';
 //import androidx.appcompat.app.AppCompatActivity;
+import 'dart:convert';
+
+import 'package:sqflite_sqlcipher/sqflite.dart';
 
 class SearchFragment extends StatefulWidget {
   const SearchFragment({Key? key}) : super(key: key);
@@ -224,6 +228,7 @@ class _SearchFragmentState extends State<SearchFragment> {
   void initState() {
     super.initState(); //initializws the state
     loadDropdownData();
+    checkTables();
 
     ///this will call the dropdown values after the fragment ui loades
   }
@@ -283,6 +288,158 @@ class _SearchFragmentState extends State<SearchFragment> {
     print("End Date   : ${PolEndDateTo}");
   }
 
+//---------------------------
+//Api call save start
+  Future<void> saveLeadFromApi(Map<String, dynamic> json) async {
+    print("Db creating inserting function called here");
+    final db = await DatabaseHelper.instance.database;
+
+    String srvcReqCode = json["SrvcReqDtlCode"].toString();
+
+    // ================= LEAD DETAILS TABLE =================
+    Map<String, dynamic> leadDetails = {
+      "SrvcReqDtlCode": srvcReqCode,
+      "CltCode": CommonUtil.encryptIfNotEmpty(
+        json["CltCode"]?.toString() ?? "",
+      ),
+      "AgentCode": CommonUtil.encryptIfNotEmpty(
+        json["AgentCode"]?.toString() ?? "",
+      ),
+      "UserId": CommonUtil.encryptIfNotEmpty(
+        json["UserId"]?.toString() ?? "",
+      ),
+      "ReqChannel": CommonUtil.encryptIfNotEmpty(
+        json["ReqChannel"]?.toString() ?? "",
+      ),
+      "LOB": CommonUtil.encryptIfNotEmpty(
+        json["LOB"]?.toString() ?? "",
+      ),
+      "ProdCode": CommonUtil.encryptIfNotEmpty(
+        json["ProdCode"]?.toString() ?? "",
+      ),
+      "ProdName": CommonUtil.encryptIfNotEmpty(
+        json["ProdName"]?.toString() ?? "",
+      ),
+      "CRMStatus": CommonUtil.encryptIfNotEmpty(json["CRMStatus"]?.toString()),
+      "WFStatDesc": CommonUtil.encryptIfNotEmpty(
+        json["WFStatDesc"]?.toString() ?? "",
+      ),
+      "LeadSourceDesc": CommonUtil.encryptIfNotEmpty(
+        json["LeadSourceDesc"]?.toString() ?? "",
+      ),
+      "BusinessTypeDesc": CommonUtil.encryptIfNotEmpty(
+        json["BusinessTypeDesc"]?.toString() ?? "",
+      ),
+      "LeadQueueDesc": CommonUtil.encryptIfNotEmpty(
+        json["LeadQueueDesc"]?.toString() ?? "",
+      ),
+      "LeadTypeDesc": CommonUtil.encryptIfNotEmpty(
+        json["LeadTypeDesc"]?.toString() ?? "",
+      ),
+      "CreatedBy": CommonUtil.encryptIfNotEmpty(
+        json["CreatedBy"]?.toString() ?? "",
+      ),
+      "CreateDTim": CommonUtil.encryptIfNotEmpty(
+        json["CreateDTim"]?.toString() ?? "",
+      ),
+      "PolicyNo": CommonUtil.encryptIfNotEmpty(
+        json["PolicyNo"]?.toString() ?? "",
+      ),
+      "PolicyEndDate": CommonUtil.encryptIfNotEmpty(
+        json["PolicyEndDate"]?.toString() ?? "",
+      ),
+      "Name": CommonUtil.encryptIfNotEmpty(
+        json["Name"]?.toString() ?? "",
+      ),
+      "MobileTel": CommonUtil.encryptIfNotEmpty(
+        json["MobileTel"]?.toString() ?? "",
+      ),
+      "Email": CommonUtil.encryptIfNotEmpty(
+        json["Email"]?.toString() ?? "",
+      ),
+      "PinCode": CommonUtil.encryptIfNotEmpty(
+        json["PinCode"]?.toString() ?? "",
+      ),
+      "StateCode": CommonUtil.encryptIfNotEmpty(
+        json["StateCode"]?.toString()?.toString() ?? "",
+      ),
+      "Zone": CommonUtil.encryptIfNotEmpty(
+        json["Zone"]?.toString() ?? "",
+      ),
+      "Region": CommonUtil.encryptIfNotEmpty(
+        json["Region"]?.toString() ?? "",
+      ),
+      "VehicleType": CommonUtil.encryptIfNotEmpty(
+        json["VehicleType"]?.toString() ?? "",
+      ),
+      "FuelType": CommonUtil.encryptIfNotEmpty(
+        json["FuelType"]?.toString() ?? "",
+      ),
+    };
+
+    // ================= ACTIVITY TRACKER TABLE =================
+    Map<String, dynamic> activityTracker = {
+      "SrvcReqDtlCode": srvcReqCode,
+      "CltCode": CommonUtil.encryptIfNotEmpty(
+        json["CltCode"]?.toString() ?? "",
+      ),
+      "ActivityCode": CommonUtil.encryptIfNotEmpty(
+        json["ActivityCode"]?.toString() ?? "",
+      ),
+      "SubActivityCode": CommonUtil.encryptIfNotEmpty(
+        json["SubActivityCode"]?.toString() ?? "",
+      ),
+      "AppointmentDate": CommonUtil.encryptIfNotEmpty(
+        json["AppointmentDate"]?.toString() ?? "",
+      ),
+      "CallBackDate": CommonUtil.encryptIfNotEmpty(
+        json["CallBackDate"]?.toString() ?? "",
+      ),
+      "TelesaleActivity": CommonUtil.encryptIfNotEmpty(
+        json["TelesaleActivity"]?.toString() ?? "",
+      ),
+      "TelesaleActivityDate": CommonUtil.encryptIfNotEmpty(
+        json["TelesaleActivityDate"]?.toString() ?? "",
+      ),
+      "Remark": CommonUtil.encryptIfNotEmpty(
+        json["TrackerRemark"]?.toString() ?? "",
+      ),
+      "CreateBy": CommonUtil.encryptIfNotEmpty(
+        json["CreateBy"]?.toString() ?? "",
+      ),
+      "CreateDTim": CommonUtil.encryptIfNotEmpty(
+        json["CreateDTim"]?.toString() ?? "",
+      ),
+    };
+
+    // ================= UPSERT LOGIC =================
+
+    print("Saving Lead: ${json["SrvcReqDtlCode"]}");
+
+    // LeadDetails
+    await db.insert(
+      "LeadDetails",
+      leadDetails,
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+    print("Saving Lead: ${json["SrvcReqDtlCode"]}");
+
+    try {
+      await db.insert(
+        "LMSLeadActivityTracker",
+        activityTracker,
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+    } catch (e) {
+      print("Error 2nd insertion : $e");
+    } // LMSLeadActivityTracker
+
+    print("records inserted into LMSLEADACTIVITY table");
+    print("Db creating inserting function called here");
+  }
+
+//Api call save end
+//--------------------------
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context); // initialize once
@@ -354,13 +511,22 @@ class _SearchFragmentState extends State<SearchFragment> {
                     elevation: 4,
                   ),
                   onPressed: () async {
-                    // CommonUtil.show(context,
-                    // message: "Searching Leads On Server.Please wait..");
+                    CommonUtil.show(context,
+                        message: "Searching Leads On Server.Please wait..");
 
                     try {
                       final response = await GetSearchData.getdata(
                           SAPCode: StaticVariables.mSAPCode);
                       print(response);
+                      final prettyJson =
+                          const JsonEncoder.withIndent('  ').convert(response);
+                      print(prettyJson);
+                      List leads = response["Table"];
+
+                      for (var lead in leads) {
+                        await saveLeadFromApi(lead);
+                        print("All leads saved to SQLite successfully");
+                      }
                     } catch (e) {
                       CommonUtil.show(context,
                           message: "Unable To Fetch data...");
@@ -473,5 +639,14 @@ class _SearchFragmentState extends State<SearchFragment> {
         ),
       ),
     );
+  }
+
+  Future<void> checkTables() async {
+    final db = await DatabaseHelper.instance.database;
+
+    var tables =
+        await db.rawQuery("SELECT name FROM sqlite_master WHERE type='table'");
+
+    print("TABLES IN DATABASE = $tables");
   }
 }

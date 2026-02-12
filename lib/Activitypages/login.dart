@@ -228,7 +228,7 @@ class _MyloginState extends State<Mylogin> {
                           password: password,
                           appVersion: StaticVariables.appVersion);
 
-                      print("Responseee :" + response.toString());
+                      print("Response :" + response.toString());
                       final table = response["Table"];
                       if (table == null || table.isEmpty) {
                         throw "Invalid Server Response";
@@ -266,6 +266,8 @@ class _MyloginState extends State<Mylogin> {
 
                         StaticVariables.mTeam =
                             jsonObject["MtFlag"]?.toString() ?? "";
+                        StaticVariables.TokenId =
+                            jsonObject["TokenId"]?.toString() ?? "";
 
                         final dashboardUpdatedDate = "";
                         final calenderUpdateDate = "";
