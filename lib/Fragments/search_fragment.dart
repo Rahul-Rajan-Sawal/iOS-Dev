@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Activitypages/searchedlead.dart';
 import 'package:flutter_application_1/Popup/popup.dart';
+import 'package:flutter_application_1/Repository/lead_repository.dart';
 import 'package:flutter_application_1/common/common_util.dart';
 import 'package:flutter_application_1/core/apicall/getsearchdata.dart';
 import 'package:flutter_application_1/core/static_variables.dart';
@@ -39,202 +40,17 @@ class _SearchFragmentState extends State<SearchFragment> {
   String? AllAgents;
   String? AllVerticalCode;
 
-// 🔹 Simulated API response (ArrayList)
-  List<Map<String, dynamic>> dummyLeadResponse = [
-    {
-      "name": "Rahul Sawal",
-      "policyName": "Health Plus",
-      "leadId": "LD00187658",
-      "leadAmount": 25000,
-      "mobilenumber": "XXXXXX3782",
-      "emailid": "rahul1@krishmark.com",
-      "activitystatus": "Pending for contact verification",
-      "remark": "N/A",
-      "policynumber": "1232781927378",
-      "leadtype": "Contact",
-      "premium": 98956710.0,
-      "vehiclemakemodel": "Koenigsegg Jesko Absolut",
-      "ncb": "No",
-      "addon": "Not Available",
-      "activity": "N/A",
-      "activitydoneby": "N/A",
-      "activitydate": "01-02-2026",
-      "tremark": "Not available",
-      "leadstatus": "WIP",
-      "workflowstatus":
-          "Assigned to sales manager – pending for mail verification",
-    },
-    {
-      "name": "Sameer Sahu",
-      "policyName": "Life Secure Self Cure",
-      "leadId": "LD00223452",
-      "leadAmount": 42000,
-      "mobilenumber": "XXXXXX1198",
-      "emailid": "sameer.sahu@krishmark.com",
-      "activitystatus": "Contacted",
-      "remark": "Customer requested callback",
-      "policynumber": "8765432198765",
-      "leadtype": "Lead",
-      "premium": 42000.0,
-      "vehiclemakemodel": "Toyota Fortuner",
-      "ncb": "N/A",
-      "addon": "Not Available",
-      "activity": "Outbound Call",
-      "activitydoneby": "Agent_102",
-      "activitydate": "28-01-2026",
-      "tremark": "Not available",
-      "leadstatus": "In Progress",
-      "workflowstatus": "Callback scheduled",
-    },
-    {
-      "name": "Keshav Khatri",
-      "policyName": "Car Protect",
-      "leadId": "LD00332342",
-      "leadAmount": 18000,
-      "mobilenumber": "XXXXXX5521",
-      "emailid": "keshav.k@krishmark.com",
-      "activitystatus": "Interested",
-      "remark": "Quotation shared",
-      "policynumber": "3456789012345",
-      "leadtype": "Lead",
-      "premium": 18000.0,
-      "vehiclemakemodel": "Hyundai Creta",
-      "ncb": "Yes",
-      "addon": "Engine Protect",
-      "activity": "Quote Sent",
-      "activitydoneby": "Agent_089",
-      "activitydate": "27-01-2026",
-      "tremark": "Not available",
-      "leadstatus": "WIP",
-      "workflowstatus": "Awaiting customer confirmation",
-    },
-    {
-      "name": "Vikash Jagtap",
-      "policyName": "Car Protect",
-      "leadId": "LD00323621",
-      "leadAmount": 18000,
-      "mobilenumber": "XXXXXX8843",
-      "emailid": "vikash.j@krishmark.com",
-      "activitystatus": "Not Reachable",
-      "remark": "Phone switched off",
-      "policynumber": "9081726354512",
-      "leadtype": "Contact",
-      "premium": 18000.0,
-      "vehiclemakemodel": "Honda City",
-      "ncb": "Yes",
-      "addon": "Zero Dep",
-      "activity": "Call Attempt",
-      "activitydoneby": "Agent_045",
-      "activitydate": "26-01-2026",
-      "tremark": "Not available",
-      "leadstatus": "Open",
-      "workflowstatus": "Pending contact verification",
-    },
-    {
-      "name": "Amit Yadav",
-      "policyName": "Car Protect",
-      "leadId": "LD00364534",
-      "leadAmount": 18000,
-      "mobilenumber": "XXXXXX6629",
-      "emailid": "amit.yadav@krishmark.com",
-      "activitystatus": "Converted",
-      "remark": "Policy issued successfully",
-      "policynumber": "5647382910456",
-      "leadtype": "Lead",
-      "premium": 18000.0,
-      "vehiclemakemodel": "Maruti Baleno",
-      "ncb": "No",
-      "addon": "Roadside Assistance",
-      "activity": "Policy Issued",
-      "activitydoneby": "Agent_011",
-      "activitydate": "25-01-2026",
-      "tremark": "Not available",
-      "leadstatus": "Closed",
-      "workflowstatus": "Policy active",
-    },
-    {
-      "name": "Vishal Kumar",
-      "policyName": "Car Protect",
-      "leadId": "LD00325577",
-      "leadAmount": 18000,
-      "mobilenumber": "XXXXXX7712",
-      "emailid": "vishal.kumar@krishmark.com",
-      "activitystatus": "Pending",
-      "remark": "Documents awaited",
-      "policynumber": "1122334455667",
-      "leadtype": "Lead",
-      "premium": 18000.0,
-      "vehiclemakemodel": "Tata Nexon",
-      "ncb": "Yes",
-      "addon": "Not Available",
-      "activity": "Doc Follow-up",
-      "activitydoneby": "Agent_066",
-      "activitydate": "24-01-2026",
-      "tremark": "Not available",
-      "leadstatus": "WIP",
-      "workflowstatus": "Pending document upload",
-    },
-    {
-      "name": "Sumit Jadav",
-      "policyName": "Car Protect",
-      "leadId": "LD00364335",
-      "leadAmount": 18000,
-      "mobilenumber": "XXXXXX9981",
-      "emailid": "sumit.jadav@krishmark.com",
-      "activitystatus": "Interested",
-      "remark": "Requested premium breakup",
-      "policynumber": "7788990011223",
-      "leadtype": "Lead",
-      "premium": 18000.0,
-      "vehiclemakemodel": "Kia Seltos",
-      "ncb": "No",
-      "addon": "Zero Dep",
-      "activity": "Call Completed",
-      "activitydoneby": "Agent_032",
-      "activitydate": "23-01-2026",
-      "tremark": "Not available",
-      "leadstatus": "Open",
-      "workflowstatus": "Awaiting customer decision",
-    },
-    {
-      "name": "Chinna Swami Mutta Swami Venugupal Ayier",
-      "policyName": "Car Protect All Cars",
-      "leadId": "LD00335234",
-      "leadAmount": 180007544,
-      "mobilenumber": "XXXXXX4455",
-      "emailid": "chinna.swami@krishmark.com",
-      "activitystatus": "High Value Lead",
-      "remark": "Priority handling assigned",
-      "policynumber": "9998887776665",
-      "leadtype": "VIP Lead",
-      "premium": 180007544.0,
-      "vehiclemakemodel": "Bugatti Chiron SS",
-      "ncb": "Yes",
-      "addon": "All Add-ons",
-      "activity": "VIP Assignment",
-      "activitydoneby": "Senior Manager",
-      "activitydate": "22-01-2026",
-      "tremark": "Not available",
-      "leadstatus": "WIP",
-      "workflowstatus": "Handled by senior sales team",
-    },
-  ];
-
-  //for Dropdata
   List<String> dropdownData = [];
   bool loading = true;
 
   @override
   void initState() {
-    super.initState(); //initializws the state
+    super.initState();
     loadDropdownData();
     checkTables();
-
-    ///this will call the dropdown values after the fragment ui loades
   }
 
   Future<void> loadDropdownData() async {
-    //simulate API
     setState(() {
       dropdownData = [
         'Option 1',
@@ -247,7 +63,7 @@ class _SearchFragmentState extends State<SearchFragment> {
     });
   }
 
-//for date controlls
+  //for date controlls
   Future<void> pickDate(TextEditingController dtcontroller) async {
     DateTime? date = await showDatePicker(
         //this will open native date picker iin phone
@@ -260,6 +76,11 @@ class _SearchFragmentState extends State<SearchFragment> {
       dtcontroller.text = "${date.day}-${date.month}-${date.year}";
     }
   }
+
+  List<String> lobOptions = ["Life", "Health", "Motor", "General"];
+  List<String> productOptions = ["Prod A", "Prod B", "Prod C"];
+  List<String> agentOptions = ["Agent 1", "Agent 2", "Agent 3"];
+  List<String> verticalOptions = ["V1", "V2", "V3"];
 
   void cleanForm() {
     prosp1Crtl.clear();
@@ -288,131 +109,475 @@ class _SearchFragmentState extends State<SearchFragment> {
     print("End Date   : ${PolEndDateTo}");
   }
 
-//---------------------------
-//Api call save start
+  //---------------------------
+  //Api call save start
   Future<void> saveLeadFromApi(Map<String, dynamic> json) async {
     print("Db creating inserting function called here");
     final db = await DatabaseHelper.instance.database;
 
     String srvcReqCode = json["SrvcReqDtlCode"].toString();
 
-    // ================= LEAD DETAILS TABLE =================
+    // // ================= LEAD DETAILS TABLE =================
+    // Map<String, dynamic> leadDetails = {
+    //   "SrvcReqDtlCode": CommonUtil.encryptIfNotEmpty(srvcReqCode),
+    //   "CltCode": CommonUtil.encryptIfNotEmpty(
+    //     json["CltCode"]?.toString() ?? "",
+    //   ),
+    //   "AgentCode": CommonUtil.encryptIfNotEmpty(
+    //     json["AgentCode"]?.toString() ?? "",
+    //   ),
+    //   "UserId": CommonUtil.encryptIfNotEmpty(
+    //     json["UserId"]?.toString() ?? "",
+    //   ),
+    //   "ReqChannel": CommonUtil.encryptIfNotEmpty(
+    //     json["ReqChannel"]?.toString() ?? "",
+    //   ),
+    //   "LOB": CommonUtil.encryptIfNotEmpty(
+    //     json["LOB"]?.toString() ?? "",
+    //   ),
+    //   "ProdCode": CommonUtil.encryptIfNotEmpty(
+    //     json["ProdCode"]?.toString() ?? "",
+    //   ),
+    //   "ProdName": CommonUtil.encryptIfNotEmpty(
+    //     json["ProdName"]?.toString() ?? "",
+    //   ),
+    //   "CRMStatus": CommonUtil.encryptIfNotEmpty(json["CRMStatus"]?.toString()),
+    //   "WFStatDesc": CommonUtil.encryptIfNotEmpty(
+    //     json["WFStatDesc"]?.toString() ?? "",
+    //   ),
+    //   "LeadSourceDesc": CommonUtil.encryptIfNotEmpty(
+    //     json["LeadSourceDesc"]?.toString() ?? "",
+    //   ),
+    //   "BusinessTypeDesc": CommonUtil.encryptIfNotEmpty(
+    //     json["BusinessTypeDesc"]?.toString() ?? "",
+    //   ),
+    //   "LeadQueueDesc": CommonUtil.encryptIfNotEmpty(
+    //     json["LeadQueueDesc"]?.toString() ?? "",
+    //   ),
+    //   "LeadTypeDesc": CommonUtil.encryptIfNotEmpty(
+    //     json["LeadTypeDesc"]?.toString() ?? "",
+    //   ),
+    //   "CreatedBy": CommonUtil.encryptIfNotEmpty(
+    //     json["CreatedBy"]?.toString() ?? "",
+    //   ),
+    //   "CreateDTim": CommonUtil.encryptIfNotEmpty(
+    //     json["CreateDTim"]?.toString() ?? "",
+    //   ),
+    //   "PolicyNo": CommonUtil.encryptIfNotEmpty(
+    //     json["PolicyNo"]?.toString() ?? "",
+    //   ),
+    //   "PolicyEndDate": CommonUtil.encryptIfNotEmpty(
+    //     json["PolicyEndDate"]?.toString() ?? "",
+    //   ),
+    //   "Name": CommonUtil.encryptIfNotEmpty(
+    //     json["Name"]?.toString() ?? "",
+    //   ),
+    //   "MobileTel": CommonUtil.encryptIfNotEmpty(
+    //     json["MobileTel"]?.toString() ?? "",
+    //   ),
+    //   "Email": CommonUtil.encryptIfNotEmpty(
+    //     json["Email"]?.toString() ?? "",
+    //   ),
+    //   "PinCode": CommonUtil.encryptIfNotEmpty(
+    //     json["PinCode"]?.toString() ?? "",
+    //   ),
+    //   "StateCode": CommonUtil.encryptIfNotEmpty(
+    //     json["StateCode"]?.toString()?.toString() ?? "",
+    //   ),
+    //   "Zone": CommonUtil.encryptIfNotEmpty(
+    //     json["Zone"]?.toString() ?? "",
+    //   ),
+    //   "Region": CommonUtil.encryptIfNotEmpty(
+    //     json["Region"]?.toString() ?? "",
+    //   ),
+    //   "VehicleType": CommonUtil.encryptIfNotEmpty(
+    //     json["VehicleType"]?.toString() ?? "",
+    //   ),
+    //   "FuelType": CommonUtil.encryptIfNotEmpty(
+    //     json["FuelType"]?.toString() ?? "",
+    //   ),
+    // };
+
+    // // ================= ACTIVITY TRACKER TABLE =================
+    // Map<String, dynamic> activityTracker = {
+    //   "SrvcReqDtlCode": CommonUtil.encryptIfNotEmpty(srvcReqCode),
+    //   "CltCode": CommonUtil.encryptIfNotEmpty(
+    //     json["CltCode"]?.toString() ?? "",
+    //   ),
+    //   "ActivityCode": CommonUtil.encryptIfNotEmpty(
+    //     json["ActivityCode"]?.toString() ?? "",
+    //   ),
+    //   "SubActivityCode": CommonUtil.encryptIfNotEmpty(
+    //     json["SubActivityCode"]?.toString() ?? "",
+    //   ),
+    //   "AppointmentDate": CommonUtil.encryptIfNotEmpty(
+    //     json["AppointmentDate"]?.toString() ?? "",
+    //   ),
+    //   "CallBackDate": CommonUtil.encryptIfNotEmpty(
+    //     json["CallBackDate"]?.toString() ?? "",
+    //   ),
+    //   "TelesaleActivity": CommonUtil.encryptIfNotEmpty(
+    //     json["TelesaleActivity"]?.toString() ?? "",
+    //   ),
+    //   "TelesaleActivityDate": CommonUtil.encryptIfNotEmpty(
+    //     json["TelesaleActivityDate"]?.toString() ?? "",
+    //   ),
+    //   "Remark": CommonUtil.encryptIfNotEmpty(
+    //     json["TrackerRemark"]?.toString() ?? "",
+    //   ),
+    //   "CreateBy": CommonUtil.encryptIfNotEmpty(
+    //     json["CreateBy"]?.toString() ?? "",
+    //   ),
+    //   "CreateDTim": CommonUtil.encryptIfNotEmpty(
+    //     json["CreateDTim"]?.toString() ?? "",
+    //   ),
+    // };
+
+    // // ================= UPSERT LOGIC =================
+
+    //test
     Map<String, dynamic> leadDetails = {
-      "SrvcReqDtlCode": srvcReqCode,
-      "CltCode": CommonUtil.encryptIfNotEmpty(
-        json["CltCode"]?.toString() ?? "",
-      ),
-      "AgentCode": CommonUtil.encryptIfNotEmpty(
-        json["AgentCode"]?.toString() ?? "",
-      ),
-      "UserId": CommonUtil.encryptIfNotEmpty(
-        json["UserId"]?.toString() ?? "",
-      ),
-      "ReqChannel": CommonUtil.encryptIfNotEmpty(
-        json["ReqChannel"]?.toString() ?? "",
-      ),
-      "LOB": CommonUtil.encryptIfNotEmpty(
-        json["LOB"]?.toString() ?? "",
-      ),
-      "ProdCode": CommonUtil.encryptIfNotEmpty(
-        json["ProdCode"]?.toString() ?? "",
-      ),
-      "ProdName": CommonUtil.encryptIfNotEmpty(
-        json["ProdName"]?.toString() ?? "",
-      ),
-      "CRMStatus": CommonUtil.encryptIfNotEmpty(json["CRMStatus"]?.toString()),
-      "WFStatDesc": CommonUtil.encryptIfNotEmpty(
-        json["WFStatDesc"]?.toString() ?? "",
-      ),
+      "SrvcReqDtlCode": CommonUtil.encryptIfNotEmpty(srvcReqCode),
+      "SrvcGrpCode":
+          CommonUtil.encryptIfNotEmpty(json["SrvcGrpCode"]?.toString() ?? ""),
+      "CltCode":
+          CommonUtil.encryptIfNotEmpty(json["CltCode"]?.toString() ?? ""),
+      "AgentCode":
+          CommonUtil.encryptIfNotEmpty(json["AgentCode"]?.toString() ?? ""),
+      "UserId": CommonUtil.encryptIfNotEmpty(json["UserId"]?.toString() ?? ""),
+      "ReqChannelId":
+          CommonUtil.encryptIfNotEmpty(json["ReqChannelId"]?.toString() ?? ""),
+      "ReqChannel":
+          CommonUtil.encryptIfNotEmpty(json["ReqChannel"]?.toString() ?? ""),
+      "LOBCode":
+          CommonUtil.encryptIfNotEmpty(json["LOBCode"]?.toString() ?? ""),
+      "LOB": CommonUtil.encryptIfNotEmpty(json["LOB"]?.toString() ?? ""),
+      "ProdCode":
+          CommonUtil.encryptIfNotEmpty(json["ProdCode"]?.toString() ?? ""),
+      "ProdName":
+          CommonUtil.encryptIfNotEmpty(json["ProdName"]?.toString() ?? ""),
+      "CRMStatus":
+          CommonUtil.encryptIfNotEmpty(json["CRMStatus"]?.toString() ?? ""),
+      "LMSStatusDesc":
+          CommonUtil.encryptIfNotEmpty(json["LMSStatusDesc"]?.toString() ?? ""),
+      "WFStatus":
+          CommonUtil.encryptIfNotEmpty(json["WFStatus"]?.toString() ?? ""),
+      "WFStatDesc":
+          CommonUtil.encryptIfNotEmpty(json["WFStatDesc"]?.toString() ?? ""),
+      "LeadSource":
+          CommonUtil.encryptIfNotEmpty(json["LeadSource"]?.toString() ?? ""),
       "LeadSourceDesc": CommonUtil.encryptIfNotEmpty(
-        json["LeadSourceDesc"]?.toString() ?? "",
-      ),
+          json["LeadSourceDesc"]?.toString() ?? ""),
+      "LeadSubSource":
+          CommonUtil.encryptIfNotEmpty(json["LeadSubSource"]?.toString() ?? ""),
+      "LeadSubSourceDesc": CommonUtil.encryptIfNotEmpty(
+          json["LeadSubSourceDesc"]?.toString() ?? ""),
+      "BusinessType":
+          CommonUtil.encryptIfNotEmpty(json["BusinessType"]?.toString() ?? ""),
       "BusinessTypeDesc": CommonUtil.encryptIfNotEmpty(
-        json["BusinessTypeDesc"]?.toString() ?? "",
-      ),
-      "LeadQueueDesc": CommonUtil.encryptIfNotEmpty(
-        json["LeadQueueDesc"]?.toString() ?? "",
-      ),
-      "LeadTypeDesc": CommonUtil.encryptIfNotEmpty(
-        json["LeadTypeDesc"]?.toString() ?? "",
-      ),
-      "CreatedBy": CommonUtil.encryptIfNotEmpty(
-        json["CreatedBy"]?.toString() ?? "",
-      ),
-      "CreateDTim": CommonUtil.encryptIfNotEmpty(
-        json["CreateDTim"]?.toString() ?? "",
-      ),
-      "PolicyNo": CommonUtil.encryptIfNotEmpty(
-        json["PolicyNo"]?.toString() ?? "",
-      ),
-      "PolicyEndDate": CommonUtil.encryptIfNotEmpty(
-        json["PolicyEndDate"]?.toString() ?? "",
-      ),
-      "Name": CommonUtil.encryptIfNotEmpty(
-        json["Name"]?.toString() ?? "",
-      ),
-      "MobileTel": CommonUtil.encryptIfNotEmpty(
-        json["MobileTel"]?.toString() ?? "",
-      ),
-      "Email": CommonUtil.encryptIfNotEmpty(
-        json["Email"]?.toString() ?? "",
-      ),
-      "PinCode": CommonUtil.encryptIfNotEmpty(
-        json["PinCode"]?.toString() ?? "",
-      ),
-      "StateCode": CommonUtil.encryptIfNotEmpty(
-        json["StateCode"]?.toString()?.toString() ?? "",
-      ),
-      "Zone": CommonUtil.encryptIfNotEmpty(
-        json["Zone"]?.toString() ?? "",
-      ),
-      "Region": CommonUtil.encryptIfNotEmpty(
-        json["Region"]?.toString() ?? "",
-      ),
-      "VehicleType": CommonUtil.encryptIfNotEmpty(
-        json["VehicleType"]?.toString() ?? "",
-      ),
-      "FuelType": CommonUtil.encryptIfNotEmpty(
-        json["FuelType"]?.toString() ?? "",
-      ),
+          json["BusinessTypeDesc"]?.toString() ?? ""),
+      "LeadQueue":
+          CommonUtil.encryptIfNotEmpty(json["LeadQueue"]?.toString() ?? ""),
+      "LeadQueueDesc":
+          CommonUtil.encryptIfNotEmpty(json["LeadQueueDesc"]?.toString() ?? ""),
+      "leadAmt":
+          CommonUtil.encryptIfNotEmpty(json["leadAmt"]?.toString() ?? ""),
+      "TypeFlag":
+          CommonUtil.encryptIfNotEmpty(json["TypeFlag"]?.toString() ?? ""),
+      "LeadTypeDesc":
+          CommonUtil.encryptIfNotEmpty(json["LeadTypeDesc"]?.toString() ?? ""),
+      "LeadStatusCode": CommonUtil.encryptIfNotEmpty(
+          json["LeadStatusCode"]?.toString() ?? ""),
+      "ActivityStatus": CommonUtil.encryptIfNotEmpty(
+          json["ActivityStatus"]?.toString() ?? ""),
+      "CustPriority":
+          CommonUtil.encryptIfNotEmpty(json["CustPriority"]?.toString() ?? ""),
+      "CustPriorityDesc": CommonUtil.encryptIfNotEmpty(
+          json["CustPriorityDesc"]?.toString() ?? ""),
+      "SaleType":
+          CommonUtil.encryptIfNotEmpty(json["SaleType"]?.toString() ?? ""),
+      "SaleTypeDesc":
+          CommonUtil.encryptIfNotEmpty(json["SaleTypeDesc"]?.toString() ?? ""),
+      "CreatedBy":
+          CommonUtil.encryptIfNotEmpty(json["CreatedBy"]?.toString() ?? ""),
+      "CreateDTim":
+          CommonUtil.encryptIfNotEmpty(json["CreateDTim"]?.toString() ?? ""),
+      "UpdatedBy":
+          CommonUtil.encryptIfNotEmpty(json["UpdatedBy"]?.toString() ?? ""),
+      "UpdateDTim":
+          CommonUtil.encryptIfNotEmpty(json["UpdateDTim"]?.toString() ?? ""),
+      "Remark": CommonUtil.encryptIfNotEmpty(json["Remark"]?.toString() ?? ""),
+      "ProposalNo":
+          CommonUtil.encryptIfNotEmpty(json["ProposalNo"]?.toString() ?? ""),
+      "PolicyNo":
+          CommonUtil.encryptIfNotEmpty(json["PolicyNo"]?.toString() ?? ""),
+      "PolicyStatus":
+          CommonUtil.encryptIfNotEmpty(json["PolicyStatus"]?.toString() ?? ""),
+      "PolicyStartDate": CommonUtil.encryptIfNotEmpty(
+          json["PolicyStartDate"]?.toString() ?? ""),
+      "PolicyEndDate":
+          CommonUtil.encryptIfNotEmpty(json["PolicyEndDate"]?.toString() ?? ""),
+      "RegistrationNo": CommonUtil.encryptIfNotEmpty(
+          json["RegistrationNo"]?.toString() ?? ""),
+      "Make": CommonUtil.encryptIfNotEmpty(json["Make"]?.toString() ?? ""),
+      "Model": CommonUtil.encryptIfNotEmpty(json["Model"]?.toString() ?? ""),
+      "Name": CommonUtil.encryptIfNotEmpty(json["Name"]?.toString() ?? ""),
+      "MobileTel":
+          CommonUtil.encryptIfNotEmpty(json["MobileTel"]?.toString() ?? ""),
+      "Email": CommonUtil.encryptIfNotEmpty(json["Email"]?.toString() ?? ""),
+      "StateCode":
+          CommonUtil.encryptIfNotEmpty(json["StateCode"]?.toString() ?? ""),
+      "PinCode":
+          CommonUtil.encryptIfNotEmpty(json["PinCode"]?.toString() ?? ""),
+      "Zone": CommonUtil.encryptIfNotEmpty(json["Zone"]?.toString() ?? ""),
+      "Region": CommonUtil.encryptIfNotEmpty(json["Region"]?.toString() ?? ""),
+      "VehicleType":
+          CommonUtil.encryptIfNotEmpty(json["VehicleType"]?.toString() ?? ""),
+      "FuelType":
+          CommonUtil.encryptIfNotEmpty(json["FuelType"]?.toString() ?? ""),
+      "Amount": CommonUtil.encryptIfNotEmpty(json["Amount"]?.toString() ?? ""),
+      //"SyncStatus": CommonUtil.encryptIfNotEmpty("0"),
     };
 
-    // ================= ACTIVITY TRACKER TABLE =================
+    //tbl 2
     Map<String, dynamic> activityTracker = {
-      "SrvcReqDtlCode": srvcReqCode,
-      "CltCode": CommonUtil.encryptIfNotEmpty(
-        json["CltCode"]?.toString() ?? "",
-      ),
-      "ActivityCode": CommonUtil.encryptIfNotEmpty(
-        json["ActivityCode"]?.toString() ?? "",
-      ),
+      "CltCode":
+          CommonUtil.encryptIfNotEmpty(json["CltCode"]?.toString() ?? ""),
+      "SrvcReqDtlCode": CommonUtil.encryptIfNotEmpty(srvcReqCode),
+      "ActivityCode":
+          CommonUtil.encryptIfNotEmpty(json["ActivityCode"]?.toString() ?? ""),
       "SubActivityCode": CommonUtil.encryptIfNotEmpty(
-        json["SubActivityCode"]?.toString() ?? "",
-      ),
+          json["SubActivityCode"]?.toString() ?? ""),
       "AppointmentDate": CommonUtil.encryptIfNotEmpty(
-        json["AppointmentDate"]?.toString() ?? "",
-      ),
-      "CallBackDate": CommonUtil.encryptIfNotEmpty(
-        json["CallBackDate"]?.toString() ?? "",
-      ),
+          json["AppointmentDate"]?.toString() ?? ""),
+      "Hour": CommonUtil.encryptIfNotEmpty(json["Hour"]?.toString() ?? ""),
+      "Minute": CommonUtil.encryptIfNotEmpty(json["Minute"]?.toString() ?? ""),
+      "AppointmentAddrss": CommonUtil.encryptIfNotEmpty(
+          json["AppointmentAddrss"]?.toString() ?? ""),
+      "AppThrough":
+          CommonUtil.encryptIfNotEmpty(json["AppThrough"]?.toString() ?? ""),
+      "ResThrough":
+          CommonUtil.encryptIfNotEmpty(json["ResThrough"]?.toString() ?? ""),
+      "RescheduleDate": CommonUtil.encryptIfNotEmpty(
+          json["RescheduleDate"]?.toString() ?? ""),
+      "RescheduleAddrss": CommonUtil.encryptIfNotEmpty(
+          json["RescheduleAddrss"]?.toString() ?? ""),
+      "ParkedLead":
+          CommonUtil.encryptIfNotEmpty(json["ParkedLead"]?.toString() ?? ""),
+      "ProposalNo":
+          CommonUtil.encryptIfNotEmpty(json["ProposalNo"]?.toString() ?? ""),
+      "IssuedPolicyNo": CommonUtil.encryptIfNotEmpty(
+          json["IssuedPolicyNo"]?.toString() ?? ""),
+      "PremiumCollected": CommonUtil.encryptIfNotEmpty(
+          json["PremiumCollected"]?.toString() ?? ""),
+      "AppReason":
+          CommonUtil.encryptIfNotEmpty(json["AppReason"]?.toString() ?? ""),
+      "SubReason":
+          CommonUtil.encryptIfNotEmpty(json["SubReason"]?.toString() ?? ""),
+      "DuplicateLeadId": CommonUtil.encryptIfNotEmpty(
+          json["DuplicateLeadId"]?.toString() ?? ""),
+      "ComptitorID":
+          CommonUtil.encryptIfNotEmpty(json["ComptitorID"]?.toString() ?? ""),
+      "LocationDtls":
+          CommonUtil.encryptIfNotEmpty(json["LocationDtls"]?.toString() ?? ""),
+      "NonContble":
+          CommonUtil.encryptIfNotEmpty(json["NonContble"]?.toString() ?? ""),
+      "NotIntrest":
+          CommonUtil.encryptIfNotEmpty(json["NotIntrest"]?.toString() ?? ""),
+      "PhoneNumber":
+          CommonUtil.encryptIfNotEmpty(json["PhoneNumber"]?.toString() ?? ""),
+      "CreateBy":
+          CommonUtil.encryptIfNotEmpty(json["CreateBy"]?.toString() ?? ""),
+      "CreateDTim":
+          CommonUtil.encryptIfNotEmpty(json["CreateDTim"]?.toString() ?? ""),
+      "UpdateBy":
+          CommonUtil.encryptIfNotEmpty(json["UpdateBy"]?.toString() ?? ""),
+      "UpdateDTim":
+          CommonUtil.encryptIfNotEmpty(json["UpdateDTim"]?.toString() ?? ""),
+      "IsActive":
+          CommonUtil.encryptIfNotEmpty(json["IsActive"]?.toString() ?? ""),
+      "oriPREMCOL":
+          CommonUtil.encryptIfNotEmpty(json["oriPREMCOL"]?.toString() ?? ""),
+      "MakenModel":
+          CommonUtil.encryptIfNotEmpty(json["MakenModel"]?.toString() ?? ""),
+      "ExpiryDate":
+          CommonUtil.encryptIfNotEmpty(json["ExpiryDate"]?.toString() ?? ""),
+      "CallBackDate":
+          CommonUtil.encryptIfNotEmpty(json["CallBackDate"]?.toString() ?? ""),
       "TelesaleActivity": CommonUtil.encryptIfNotEmpty(
-        json["TelesaleActivity"]?.toString() ?? "",
-      ),
+          json["TelesaleActivity"]?.toString() ?? ""),
       "TelesaleActivityDate": CommonUtil.encryptIfNotEmpty(
-        json["TelesaleActivityDate"]?.toString() ?? "",
-      ),
-      "Remark": CommonUtil.encryptIfNotEmpty(
-        json["TrackerRemark"]?.toString() ?? "",
-      ),
-      "CreateBy": CommonUtil.encryptIfNotEmpty(
-        json["CreateBy"]?.toString() ?? "",
-      ),
-      "CreateDTim": CommonUtil.encryptIfNotEmpty(
-        json["CreateDTim"]?.toString() ?? "",
-      ),
+          json["TelesaleActivityDate"]?.toString() ?? ""),
+      "InfectionID":
+          CommonUtil.encryptIfNotEmpty(json["InfectionID"]?.toString() ?? ""),
+      "TicketNo":
+          CommonUtil.encryptIfNotEmpty(json["TicketNo"]?.toString() ?? ""),
+      "QuoteNo":
+          CommonUtil.encryptIfNotEmpty(json["QuoteNo"]?.toString() ?? ""),
+      "LcReason":
+          CommonUtil.encryptIfNotEmpty(json["LcReason"]?.toString() ?? ""),
+      "LcSubReason":
+          CommonUtil.encryptIfNotEmpty(json["LcSubReason"]?.toString() ?? ""),
+      "Age": CommonUtil.encryptIfNotEmpty(json["Age"]?.toString() ?? ""),
+      "RtoLoc": CommonUtil.encryptIfNotEmpty(json["RtoLoc"]?.toString() ?? ""),
+      "Price": CommonUtil.encryptIfNotEmpty(json["Price"]?.toString() ?? ""),
+      "YOM": CommonUtil.encryptIfNotEmpty(json["YOM"]?.toString() ?? ""),
+      "PED": CommonUtil.encryptIfNotEmpty(json["PED"]?.toString() ?? ""),
+      "Feature":
+          CommonUtil.encryptIfNotEmpty(json["Feature"]?.toString() ?? ""),
+      "Area": CommonUtil.encryptIfNotEmpty(json["Area"]?.toString() ?? ""),
+      "PHC_NO": CommonUtil.encryptIfNotEmpty(json["PHC_NO"]?.toString() ?? ""),
+      "ProductType":
+          CommonUtil.encryptIfNotEmpty(json["ProductType"]?.toString() ?? ""),
+      "Lan": CommonUtil.encryptIfNotEmpty(json["Lan"]?.toString() ?? ""),
+      "PostPQuery":
+          CommonUtil.encryptIfNotEmpty(json["PostPQuery"]?.toString() ?? ""),
+      "NotEligible":
+          CommonUtil.encryptIfNotEmpty(json["NotEligible"]?.toString() ?? ""),
+      "Reason": CommonUtil.encryptIfNotEmpty(json["Reason"]?.toString() ?? ""),
+      "RsReason":
+          CommonUtil.encryptIfNotEmpty(json["RsReason"]?.toString() ?? ""),
+      "ModelValue":
+          CommonUtil.encryptIfNotEmpty(json["ModelValue"]?.toString() ?? ""),
+      "NonContactableDtm": CommonUtil.encryptIfNotEmpty(
+          json["NonContactableDtm"]?.toString() ?? ""),
+      "CallBackDateRenewal": CommonUtil.encryptIfNotEmpty(
+          json["CallBackDateRenewal"]?.toString() ?? ""),
+      "NonConRes":
+          CommonUtil.encryptIfNotEmpty(json["NonConRes"]?.toString() ?? ""),
+      "ChequeNo":
+          CommonUtil.encryptIfNotEmpty(json["ChequeNo"]?.toString() ?? ""),
+      "ChequeDate":
+          CommonUtil.encryptIfNotEmpty(json["ChequeDate"]?.toString() ?? ""),
+      "ChequeBankName": CommonUtil.encryptIfNotEmpty(
+          json["ChequeBankName"]?.toString() ?? ""),
+      "RegistrationNo": CommonUtil.encryptIfNotEmpty(
+          json["RegistrationNo"]?.toString() ?? ""),
+      "RenewalLeadLostReason": CommonUtil.encryptIfNotEmpty(
+          json["RenewalLeadLostReason"]?.toString() ?? ""),
+      "PolicyAlreadyRenewedReason": CommonUtil.encryptIfNotEmpty(
+          json["PolicyAlreadyRenewedReason"]?.toString() ?? ""),
+      "ParkedLeadDateTime": CommonUtil.encryptIfNotEmpty(
+          json["ParkedLeadDateTime"]?.toString() ?? ""),
+      "FollowupDt":
+          CommonUtil.encryptIfNotEmpty(json["FollowupDt"]?.toString() ?? ""),
+      "QutationDt":
+          CommonUtil.encryptIfNotEmpty(json["QutationDt"]?.toString() ?? ""),
+      "ddlAct16Subreason": CommonUtil.encryptIfNotEmpty(
+          json["ddlAct16Subreason"]?.toString() ?? ""),
+      "txt416": CommonUtil.encryptIfNotEmpty(json["txt416"]?.toString() ?? ""),
+      "txtAD16":
+          CommonUtil.encryptIfNotEmpty(json["txtAD16"]?.toString() ?? ""),
+      "txtPN16":
+          CommonUtil.encryptIfNotEmpty(json["txtPN16"]?.toString() ?? ""),
+      "txt316": CommonUtil.encryptIfNotEmpty(json["txt316"]?.toString() ?? ""),
+      "ddlMakeModel516": CommonUtil.encryptIfNotEmpty(
+          json["ddlMakeModel516"]?.toString() ?? ""),
+      "ddlModel616":
+          CommonUtil.encryptIfNotEmpty(json["ddlModel616"]?.toString() ?? ""),
+      "txt716": CommonUtil.encryptIfNotEmpty(json["txt716"]?.toString() ?? ""),
+      "txt816": CommonUtil.encryptIfNotEmpty(json["txt816"]?.toString() ?? ""),
+      "ddlAppReasonTrack5": CommonUtil.encryptIfNotEmpty(
+          json["ddlAppReasonTrack5"]?.toString() ?? ""),
+      "ddlSubReason":
+          CommonUtil.encryptIfNotEmpty(json["ddlSubReason"]?.toString() ?? ""),
+      "txtDuplicateLeadId": CommonUtil.encryptIfNotEmpty(
+          json["txtDuplicateLeadId"]?.toString() ?? ""),
+      "ddlCompetitorList": CommonUtil.encryptIfNotEmpty(
+          json["ddlCompetitorList"]?.toString() ?? ""),
+      "txtLocationDtls": CommonUtil.encryptIfNotEmpty(
+          json["txtLocationDtls"]?.toString() ?? ""),
+      "txtTctNoact5":
+          CommonUtil.encryptIfNotEmpty(json["txtTctNoact5"]?.toString() ?? ""),
+      "txtAge": CommonUtil.encryptIfNotEmpty(json["txtAge"]?.toString() ?? ""),
+      "txtArea2":
+          CommonUtil.encryptIfNotEmpty(json["txtArea2"]?.toString() ?? ""),
+      "ddlRTOLoc":
+          CommonUtil.encryptIfNotEmpty(json["ddlRTOLoc"]?.toString() ?? ""),
+      "txtPhcNo":
+          CommonUtil.encryptIfNotEmpty(json["txtPhcNo"]?.toString() ?? ""),
+      "txtPrice":
+          CommonUtil.encryptIfNotEmpty(json["txtPrice"]?.toString() ?? ""),
+      "txtPrdType":
+          CommonUtil.encryptIfNotEmpty(json["txtPrdType"]?.toString() ?? ""),
+      "txtYOM": CommonUtil.encryptIfNotEmpty(json["txtYOM"]?.toString() ?? ""),
+      "txtPed2":
+          CommonUtil.encryptIfNotEmpty(json["txtPed2"]?.toString() ?? ""),
+      "txtLanguage":
+          CommonUtil.encryptIfNotEmpty(json["txtLanguage"]?.toString() ?? ""),
+      "ddlMakeModelact5": CommonUtil.encryptIfNotEmpty(
+          json["ddlMakeModelact5"]?.toString() ?? ""),
+      "txtReason5":
+          CommonUtil.encryptIfNotEmpty(json["txtReason5"]?.toString() ?? ""),
+      "txtCallBakDateTime19": CommonUtil.encryptIfNotEmpty(
+          json["txtCallBakDateTime19"]?.toString() ?? ""),
+      "txtPN19":
+          CommonUtil.encryptIfNotEmpty(json["txtPN19"]?.toString() ?? ""),
+      "txt319": CommonUtil.encryptIfNotEmpty(json["txt319"]?.toString() ?? ""),
+      "txtRMSAppointmentDate": CommonUtil.encryptIfNotEmpty(
+          json["txtRMSAppointmentDate"]?.toString() ?? ""),
+      "txtRMSCallBackDate": CommonUtil.encryptIfNotEmpty(
+          json["txtRMSCallBackDate"]?.toString() ?? ""),
+      "ddlRMSNonContactableReason": CommonUtil.encryptIfNotEmpty(
+          json["ddlRMSNonContactableReason"]?.toString() ?? ""),
+      "txtRMSChequeNo": CommonUtil.encryptIfNotEmpty(
+          json["txtRMSChequeNo"]?.toString() ?? ""),
+      "ddlRMSRenewalLeadLostReason": CommonUtil.encryptIfNotEmpty(
+          json["ddlRMSRenewalLeadLostReason"]?.toString() ?? ""),
+      "ddlRMSPolicyAlreadyRenewedReason": CommonUtil.encryptIfNotEmpty(
+          json["ddlRMSPolicyAlreadyRenewedReason"]?.toString() ?? ""),
+      "txtRMSMobileNo": CommonUtil.encryptIfNotEmpty(
+          json["txtRMSMobileNo"]?.toString() ?? ""),
+      "txtAppointmentDate27": CommonUtil.encryptIfNotEmpty(
+          json["txtAppointmentDate27"]?.toString() ?? ""),
+      "txtRescheduletDate28": CommonUtil.encryptIfNotEmpty(
+          json["txtRescheduletDate28"]?.toString() ?? ""),
+      "ddlAppReasonTrack29": CommonUtil.encryptIfNotEmpty(
+          json["ddlAppReasonTrack29"]?.toString() ?? ""),
+      "txtPolicyNo30":
+          CommonUtil.encryptIfNotEmpty(json["txtPolicyNo30"]?.toString() ?? ""),
+      "txtParkedLead31": CommonUtil.encryptIfNotEmpty(
+          json["txtParkedLead31"]?.toString() ?? ""),
+      "txtFollowup32":
+          CommonUtil.encryptIfNotEmpty(json["txtFollowup32"]?.toString() ?? ""),
+      "txtQutation33":
+          CommonUtil.encryptIfNotEmpty(json["txtQutation33"]?.toString() ?? ""),
+      "nInstrumentType": CommonUtil.encryptIfNotEmpty(
+          json["nInstrumentType"]?.toString() ?? ""),
+      "nLcPolicyNumber": CommonUtil.encryptIfNotEmpty(
+          json["nLcPolicyNumber"]?.toString() ?? ""),
+      "nScPolicyNumber": CommonUtil.encryptIfNotEmpty(
+          json["nScPolicyNumber"]?.toString() ?? ""),
+      "nScInstrumentNo": CommonUtil.encryptIfNotEmpty(
+          json["nScInstrumentNo"]?.toString() ?? ""),
+      "nScInstrumentAmt": CommonUtil.encryptIfNotEmpty(
+          json["nScInstrumentAmt"]?.toString() ?? ""),
+      "nCallBackDate":
+          CommonUtil.encryptIfNotEmpty(json["nCallBackDate"]?.toString() ?? ""),
+      "nExpectedClosureDate": CommonUtil.encryptIfNotEmpty(
+          json["nExpectedClosureDate"]?.toString() ?? ""),
+      "nLostCompDueTo": CommonUtil.encryptIfNotEmpty(
+          json["nLostCompDueTo"]?.toString() ?? ""),
+      "nLlPolicyNoCompetition": CommonUtil.encryptIfNotEmpty(
+          json["nLlPolicyNoCompetition"]?.toString() ?? ""),
+      "nCmpNameCompetition": CommonUtil.encryptIfNotEmpty(
+          json["nCmpNameCompetition"]?.toString() ?? ""),
+      "nNewPolEndDate": CommonUtil.encryptIfNotEmpty(
+          json["nNewPolEndDate"]?.toString() ?? ""),
+      "internalcomment": CommonUtil.encryptIfNotEmpty(
+          json["internalcomment"]?.toString() ?? ""),
+      "SyncStatus":
+          CommonUtil.encryptIfNotEmpty(json["SyncStatus"]?.toString() ?? "0"),
+      "InstType":
+          CommonUtil.encryptIfNotEmpty(json["InstType"]?.toString() ?? ""),
+      "LstComDueTo":
+          CommonUtil.encryptIfNotEmpty(json["LstComDueTo"]?.toString() ?? ""),
+      "NewPolEndDate":
+          CommonUtil.encryptIfNotEmpty(json["NewPolEndDate"]?.toString() ?? ""),
+      "Remark": CommonUtil.encryptIfNotEmpty(json["Remark"]?.toString() ?? ""),
+      "TempSrvcReqDtlCode": CommonUtil.encryptIfNotEmpty(
+          json["TempSrvcReqDtlCode"]?.toString() ?? ""),
     };
-
-    // ================= UPSERT LOGIC =================
 
     print("Saving Lead: ${json["SrvcReqDtlCode"]}");
 
@@ -438,15 +603,12 @@ class _SearchFragmentState extends State<SearchFragment> {
     print("Db creating inserting function called here");
   }
 
-//Api call save end
-//--------------------------
+  //Api call save end
+  //--------------------------
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context); // initialize once
 
-    if (loading) {
-      return const Center(child: CircularProgressIndicator());
-    }
     return Scaffold(
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(15),
@@ -511,36 +673,62 @@ class _SearchFragmentState extends State<SearchFragment> {
                     elevation: 4,
                   ),
                   onPressed: () async {
+                    // Show a loading popup
                     CommonUtil.show(context,
-                        message: "Searching Leads On Server.Please wait..");
+                        message: "Searching Leads On Server. Please wait..");
+
+                    // Initialize the list outside to be used later
+                    List<Map<String, dynamic>> decryptedLeads = [];
 
                     try {
+                      // Fetch leads data from API
                       final response = await GetSearchData.getdata(
-                          SAPCode: StaticVariables.mSAPCode);
-                      print(response);
+                        SAPCode: StaticVariables.mSAPCode,
+                      );
+
+                      // Pretty print the JSON for debugging
                       final prettyJson =
                           const JsonEncoder.withIndent('  ').convert(response);
                       print(prettyJson);
+
+                      // Get the lead list from the response
                       List leads = response["Table"];
 
+                      // Loop through each lead and save it to SQLite
                       for (var lead in leads) {
                         await saveLeadFromApi(lead);
-                        print("All leads saved to SQLite successfully");
+                        print(
+                            "Lead ${lead["SrvcReqDtlCode"]} saved successfully");
                       }
+
+                      // Fetch decrypted leads for the next screen
+                      decryptedLeads = await LeadRepository.fetchDecryptedLeads(
+                        columnsToDecrypt: [
+                          "Name",
+                          "ProdName",
+                          "SrvcReqDtlCode",
+                          "leadAmt"
+                        ],
+                      );
                     } catch (e) {
+                      // Show an error message if something goes wrong
                       CommonUtil.show(context,
                           message: "Unable To Fetch data...");
+                      print("Error fetching leads: $e");
                     } finally {
+                      // Hide the loader in any case
                       CommonUtil.hide(context);
                     }
 
+                    // Navigate to SearchedLead screen with the decrypted leads
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SearchedLead(
-                            leadList: dummyLeadResponse,
-                          ),
-                        ));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SearchedLead(
+                          leadList: decryptedLeads,
+                        ),
+                      ),
+                    );
                   },
                   child: const Text("Search"),
                 ))
@@ -575,7 +763,7 @@ class _SearchFragmentState extends State<SearchFragment> {
     );
   }
 
-//----------------
+  //----------------
   Widget buildDropdown(
     String labelText,
     String? value,
