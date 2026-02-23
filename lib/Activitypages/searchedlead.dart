@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Activitypages/view_details.dart';
 import 'package:flutter_application_1/Activitypages/lead_summary.dart';
 import 'package:flutter_application_1/Activitypages/lead_update_activity.dart';
-import 'package:flutter_application_1/common/common_util.dart';
+//import 'package:flutter_application_1/common/common_util.dart';
 
 class SearchedLead extends StatefulWidget {
   final List<Map<String, dynamic>> leadList;
